@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>not rick roll</title>
+    <title>Academic Portal - Material Design</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -170,6 +170,73 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+        }
+
+        /* Toggle Switch Styles */
+        .toggle-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .toggle-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            text-align: center;
+        }
+
+        .toggle-switch-wrapper {
+            position: relative;
+            display: flex;
+            background-color: var(--md-sys-color-surface-variant);
+            border-radius: 24px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .toggle-option {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-option svg {
+            flex-shrink: 0;
+        }
+
+        .toggle-option.active {
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            height: calc(100% - 8px);
+            background-color: var(--md-sys-color-primary);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-slider.faculty {
+            transform: translateX(calc(100% + 4px));
         }
 
         .form-row {
@@ -584,6 +651,191 @@
             animation: fadeIn 0.3s;
         }
 
+        .manual-entry-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 12px;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                max-height: 1000px;
+            }
+        }
+
+        .section-divider {
+            text-align: center;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-divider span {
+            background-color: var(--md-sys-color-surface);
+            padding: 0 1rem;
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.875rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: var(--md-sys-color-outline);
+            z-index: 0;
+        }
+
+        /* Text Button */
+        .md-text-button {
+            background: none;
+            border: none;
+            color: var(--md-sys-color-primary);
+            font-weight: 500;
+            font-size: 0.875rem;
+            padding: 0.625rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .md-text-button:hover {
+            background-color: rgba(var(--md-sys-color-primary), 0.08);
+        }
+
+        .md-text-button.cancel-btn {
+            color: var(--md-sys-color-error);
+        }
+
+        .md-text-button.cancel-btn:hover {
+            background-color: rgba(var(--md-sys-color-error), 0.08);
+        }
+
+        .md-text-button svg {
+            flex-shrink: 0;
+        }
+
+        /* Saved Courses List */
+        .saved-courses-section {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--md-sys-color-primary-container);
+            border-radius: 12px;
+        }
+
+        .saved-courses-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-primary-container);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .saved-courses-title svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .saved-course-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem;
+            background-color: var(--md-sys-color-surface);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .saved-course-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .saved-course-item:hover {
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .saved-course-item.selected {
+            border-color: var(--md-sys-color-primary);
+            background-color: rgba(var(--md-sys-color-primary), 0.08);
+        }
+
+        .saved-course-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .saved-course-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .saved-course-details {
+            font-size: 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-top: 0.25rem;
+        }
+
+        .delete-course-btn {
+            background: none;
+            border: none;
+            color: var(--md-sys-color-error);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+            opacity: 0;
+        }
+
+        .saved-course-item:hover .delete-course-btn {
+            opacity: 1;
+        }
+
+        .delete-course-btn:hover {
+            background-color: rgba(var(--md-sys-color-error), 0.12);
+        }
+
+        .delete-course-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
         /* Snackbar (Notification) */
         .snackbar-container {
             position: fixed;
@@ -856,12 +1108,29 @@
         </div>
 
         <form id="loginForm" class="login-form" novalidate>
-            <div class="input-group">
-                <label for="userTypeSelect" class="input-label">Login As</label>
-                <select id="userTypeSelect" class="native-select">
-                    <option value="student">Student</option>
-                    <option value="faculty">Faculty</option>
-                </select>
+            <!-- Animated Toggle Switch -->
+            <div class="toggle-container">
+                <div class="toggle-label">Login As</div>
+                <div class="toggle-switch-wrapper">
+                    <button type="button" class="toggle-option active" data-value="student">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5A2.5 2.5 0 0 1 4 19.5v0Z"/>
+                            <path d="M15 2v10.54a2.5 2.5 0 1 1-4 0V2"/>
+                        </svg>
+                        Student
+                    </button>
+                    <button type="button" class="toggle-option" data-value="faculty">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2v6h6"/>
+                            <path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/>
+                            <path d="M8 12h2"/>
+                            <path d="M8 16h8"/>
+                            <path d="M12 12h4"/>
+                        </svg>
+                        Faculty
+                    </button>
+                    <div class="toggle-slider"></div>
+                </div>
             </div>
 
             <div id="studentFields" class="student-fields">
@@ -887,15 +1156,81 @@
             </div>
 
             <div id="facultyFields" class="faculty-fields">
+                <!-- Saved Courses Section (shown first) -->
+                <div id="savedCoursesContainer"></div>
+                
+                <!-- Course Selection -->
                 <div class="input-group">
-                    <label for="courseSearch" class="input-label">Course</label>
+                    <label for="courseSearch" class="input-label">Select Existing Course</label>
                     <div class="combobox-wrapper">
                         <input type="text" id="courseSearch" class="md-input"
-                            placeholder="Select or search for a course..." autocomplete="off">
+                            placeholder="Search for a course..." autocomplete="off">
                         <div class="combobox-options"></div>
                         <input type="hidden" id="course" name="course" required>
                     </div>
                     <div id="courseError" class="validation-message"></div>
+                </div>
+                
+                <!-- Add New Course Button -->
+                <button type="button" id="toggleManualEntryBtn" class="md-text-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Add New Course
+                </button>
+                
+                <!-- Manual Entry Section (hidden by default) -->
+                <div id="manualEntrySection" class="manual-entry-section hidden">
+                    <div class="section-divider">
+                        <span>New Course Details</span>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <input type="text" id="manualFacultyName" class="md-input" placeholder=" " autocomplete="off">
+                            <label for="manualFacultyName" class="input-label">Faculty Name</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="manualCourseCode" class="md-input" placeholder=" " autocomplete="off">
+                            <label for="manualCourseCode" class="input-label">Course Code</label>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="text" id="manualCourseName" class="md-input" placeholder=" " autocomplete="off">
+                        <label for="manualCourseName" class="input-label">Course Name</label>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="manualSemester" class="input-label">Semester</label>
+                            <select id="manualSemester" class="native-select">
+                                <option value="" disabled selected></option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="manualYear" class="input-label">Academic Year</label>
+                            <select id="manualYear" class="native-select">
+                                <option value="" disabled selected></option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="cancelManualEntryBtn" class="md-text-button cancel-btn">
+                        Cancel
+                    </button>
                 </div>
             </div>
 
@@ -1000,7 +1335,6 @@
             // '731112_2': { code: '731112', name: 'Algebra sem 1', coordinator: 'sarita singh', sem: '1', year: '2023' },
         };
 
-
         // --- CUSTOM SELECT COMPONENT LOGIC ---
         function createCustomSelect(selectElement) {
             const wrapper = document.createElement('div');
@@ -1073,18 +1407,20 @@
             modalCloseBtn: document.getElementById('modalCloseBtn'),
 
             inputs: {
-                userTypeSelect: document.getElementById('userTypeSelect'),
                 year: document.getElementById('year'),
                 studentPhoneNumber: document.getElementById('studentPhoneNumber'),
-                // facultyName: document.getElementById('facultyName'), // Removed
                 courseSearch: document.getElementById('courseSearch'),
                 course: document.getElementById('course'),
+                manualFacultyName: document.getElementById('manualFacultyName'),
+                manualCourseCode: document.getElementById('manualCourseCode'),
+                manualCourseName: document.getElementById('manualCourseName'),
+                manualSemester: document.getElementById('manualSemester'),
+                manualYear: document.getElementById('manualYear'),
             },
 
             errors: {
                 year: document.getElementById('yearError'),
                 studentPhone: document.getElementById('studentPhoneError'),
-                // facultyName: document.getElementById('facultyNameError'), // Removed
                 course: document.getElementById('courseError'),
             },
 
@@ -1117,6 +1453,8 @@
             marks: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
             avatarStudent: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5A2.5 2.5 0 0 1 4 19.5v0Z"/><path d="M15 2v10.54a2.5 2.5 0 1 1-4 0V2"/></svg>`,
             avatarFaculty: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6h6"/><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M8 12h2"/><path d="M8 16h8"/><path d="M12 12h4"/></svg>`,
+            delete: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`,
+            bookmark: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>`,
         };
 
         const studentMenuItems = [
@@ -1146,7 +1484,98 @@
         ];
 
         // --- Event Listeners ---
-        DOM.inputs.userTypeSelect.addEventListener('change', updateFormForUserType);
+        // Toggle switch for user type
+        const toggleOptions = document.querySelectorAll('.toggle-option');
+        const toggleSlider = document.querySelector('.toggle-slider');
+
+        toggleOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const value = option.dataset.value;
+                
+                // Update active states
+                toggleOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                // Move slider
+                if (value === 'faculty') {
+                    toggleSlider.classList.add('faculty');
+                } else {
+                    toggleSlider.classList.remove('faculty');
+                }
+                
+                // Update current user type
+                currentUser.type = value;
+                updateFormForUserType();
+            });
+        });
+
+        // Toggle manual entry section
+        const toggleManualEntryBtn = document.getElementById('toggleManualEntryBtn');
+        const manualEntrySection = document.getElementById('manualEntrySection');
+        const cancelManualEntryBtn = document.getElementById('cancelManualEntryBtn');
+
+        toggleManualEntryBtn.addEventListener('click', () => {
+            manualEntrySection.classList.toggle('hidden');
+            if (!manualEntrySection.classList.contains('hidden')) {
+                toggleManualEntryBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Hide Form
+                `;
+                DOM.inputs.courseSearch.value = '';
+                DOM.inputs.course.value = '';
+            } else {
+                toggleManualEntryBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Add New Course
+                `;
+                clearManualFields();
+            }
+        });
+
+        cancelManualEntryBtn.addEventListener('click', () => {
+            manualEntrySection.classList.add('hidden');
+            toggleManualEntryBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add New Course
+            `;
+            clearManualFields();
+        });
+
+        // Clear combobox when manual fields are used
+        [DOM.inputs.manualFacultyName, DOM.inputs.manualCourseCode, DOM.inputs.manualCourseName].forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.value.trim()) {
+                    DOM.inputs.courseSearch.value = '';
+                    DOM.inputs.course.value = '';
+                    courseCombobox.classList.remove('open');
+                }
+            });
+        });
+
+        // Clear manual fields when combobox is used
+        DOM.inputs.courseSearch.addEventListener('input', () => {
+            if (DOM.inputs.courseSearch.value.trim()) {
+                // Don't clear, just hide the manual section
+                if (!manualEntrySection.classList.contains('hidden')) {
+                    manualEntrySection.classList.add('hidden');
+                    toggleManualEntryBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Add New Course
+                    `;
+                }
+            }
+        });
 
         // --- Combobox Logic ---
         const courseCombobox = document.querySelector('.combobox-wrapper');
@@ -1192,16 +1621,161 @@
         // --- UI Update Functions ---
         function updateFormForUserType() {
             clearAllErrors();
-            currentUser.type = DOM.inputs.userTypeSelect.value;
             const isFaculty = currentUser.type === 'faculty';
             DOM.studentFields.classList.toggle('show', !isFaculty);
             DOM.facultyFields.classList.toggle('show', isFaculty);
+            
+            if (isFaculty) {
+                renderSavedCourses();
+            }
+        }
+
+        function clearManualFields() {
+            DOM.inputs.manualFacultyName.value = '';
+            DOM.inputs.manualCourseCode.value = '';
+            DOM.inputs.manualCourseName.value = '';
+            
+            // Reset dropdowns
+            const semesterSelect = document.getElementById('manualSemester');
+            const yearSelect = document.getElementById('manualYear');
+            if (semesterSelect) {
+                semesterSelect.selectedIndex = 0;
+                semesterSelect.dispatchEvent(new Event('change'));
+            }
+            if (yearSelect) {
+                yearSelect.selectedIndex = 0;
+                yearSelect.dispatchEvent(new Event('change'));
+            }
+        }
+
+        // --- LocalStorage Management ---
+        const STORAGE_KEY = 'faculty_custom_courses';
+
+        function getSavedCourses() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                return saved ? JSON.parse(saved) : {};
+            } catch (e) {
+                console.error('Error reading saved courses:', e);
+                return {};
+            }
+        }
+
+        function saveCourse(courseKey, courseData) {
+            try {
+                const courses = getSavedCourses();
+                courses[courseKey] = courseData;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(courses));
+                return true;
+            } catch (e) {
+                console.error('Error saving course:', e);
+                showSnackbar('Failed to save course to storage');
+                return false;
+            }
+        }
+
+        function deleteCourse(courseKey) {
+            try {
+                const courses = getSavedCourses();
+                delete courses[courseKey];
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(courses));
+                return true;
+            } catch (e) {
+                console.error('Error deleting course:', e);
+                showSnackbar('Failed to delete course');
+                return false;
+            }
+        }
+
+        function renderSavedCourses() {
+            const container = document.getElementById('savedCoursesContainer');
+            container.innerHTML = '';
+
+            const savedCourses = getSavedCourses();
+            const courseKeys = Object.keys(savedCourses);
+
+            if (courseKeys.length === 0) return;
+
+            const section = document.createElement('div');
+            section.className = 'saved-courses-section';
+            section.innerHTML = `
+                <div class="saved-courses-title">
+                    ${icons.bookmark}
+                    Your Saved Courses
+                </div>
+            `;
+
+            courseKeys.forEach(key => {
+                const course = savedCourses[key];
+                const item = document.createElement('div');
+                item.className = 'saved-course-item';
+                item.dataset.key = key;
+                item.innerHTML = `
+                    <div class="saved-course-info">
+                        <div class="saved-course-name">${course.code} - ${course.name}</div>
+                        <div class="saved-course-details">${course.coordinator} | Sem ${course.sem} | Year ${course.year}</div>
+                    </div>
+                    <button class="delete-course-btn" data-key="${key}" title="Delete this course">
+                        ${icons.delete}
+                    </button>
+                `;
+
+                // Click to select course
+                item.querySelector('.saved-course-info').addEventListener('click', () => {
+                    // Remove previous selection
+                    document.querySelectorAll('.saved-course-item').forEach(el => el.classList.remove('selected'));
+                    item.classList.add('selected');
+                    
+                    DOM.inputs.course.value = key;
+                    DOM.inputs.courseSearch.value = `${course.code} - ${course.name} (Sem ${course.sem})`;
+                    
+                    // Hide manual entry if open
+                    const manualSection = document.getElementById('manualEntrySection');
+                    if (!manualSection.classList.contains('hidden')) {
+                        manualSection.classList.add('hidden');
+                        document.getElementById('toggleManualEntryBtn').innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Add New Course
+                        `;
+                    }
+                    
+                    showSnackbar('Course selected');
+                });
+
+                // Delete button
+                item.querySelector('.delete-course-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (confirm(`Delete "${course.name}"?`)) {
+                        if (deleteCourse(key)) {
+                            showSnackbar('Course deleted');
+                            renderSavedCourses();
+                            populateFacultyCombobox();
+                            // Clear selection if this was the selected course
+                            if (DOM.inputs.course.value === key) {
+                                DOM.inputs.course.value = '';
+                                DOM.inputs.courseSearch.value = '';
+                            }
+                        }
+                    }
+                });
+
+                section.appendChild(item);
+            });
+
+            container.appendChild(section);
         }
 
         function populateFacultyCombobox() {
             courseOptionsContainer.innerHTML = '';
-            for (const key in COURSE_DATA) {
-                const course = COURSE_DATA[key];
+            
+            // Merge predefined and saved courses
+            const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
+            
+            for (const key in allCourses) {
+                const course = allCourses[key];
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'combobox-option';
                 optionDiv.textContent = `${course.code} - ${course.name} (Sem ${course.sem})`;
@@ -1222,7 +1796,8 @@
             DOM.topNavAvatar.innerHTML = avatarHTML;
 
             if (isFaculty) {
-                const courseInfo = COURSE_DATA[currentUser.courseCode];
+                const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
+                const courseInfo = allCourses[currentUser.courseCode];
                 DOM.dashboard.welcome.textContent = `Welcome, ${currentUser.facultyName}!`;
                 DOM.dashboard.userInfo.innerHTML = `
                     <div class="user-info-split">
@@ -1275,12 +1850,47 @@
 
             if (currentUser.type === 'faculty') {
                 const courseKey = DOM.inputs.course.value;
-                const courseData = COURSE_DATA[courseKey];
-                currentUser.facultyName = courseData.coordinator; // Set name from data
-                currentUser.phone = courseData.coordinator; // Use coordinator name as ID
-                currentUser.year = courseData.year;
-                currentUser.semester = courseData.sem;
-                currentUser.courseCode = courseKey; // Store the unique key
+                
+                // Check if using manual entry
+                const isManualEntry = !courseKey && DOM.inputs.manualFacultyName.value.trim();
+                
+                if (isManualEntry) {
+                    // Create course from manual fields
+                    const manualCourseCode = DOM.inputs.manualCourseCode.value.trim();
+                    const manualSemSelect = document.getElementById('manualSemester');
+                    const manualYearSelect = document.getElementById('manualYear');
+                    const manualSem = manualSemSelect.value;
+                    const manualYear = manualYearSelect.value;
+                    const generatedKey = `${manualCourseCode}_${manualSem}_${manualYear}`;
+                    
+                    const courseData = {
+                        code: manualCourseCode,
+                        name: DOM.inputs.manualCourseName.value.trim(),
+                        coordinator: DOM.inputs.manualFacultyName.value.trim(),
+                        sem: manualSem,
+                        year: manualYear
+                    };
+                    
+                    // Save to localStorage
+                    saveCourse(generatedKey, courseData);
+                    
+                    currentUser.facultyName = courseData.coordinator;
+                    currentUser.phone = courseData.coordinator;
+                    currentUser.year = courseData.year;
+                    currentUser.semester = courseData.sem;
+                    currentUser.courseCode = generatedKey;
+                    
+                    showSnackbar('Custom course saved!');
+                } else {
+                    // Use selected course from dropdown
+                    const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
+                    const courseData = allCourses[courseKey];
+                    currentUser.facultyName = courseData.coordinator;
+                    currentUser.phone = courseData.coordinator;
+                    currentUser.year = courseData.year;
+                    currentUser.semester = courseData.sem;
+                    currentUser.courseCode = courseKey;
+                }
             } else {
                 currentUser.phone = DOM.inputs.studentPhoneNumber.value.trim();
                 currentUser.year = DOM.inputs.year.value;
@@ -1325,7 +1935,8 @@
 
             const fields = { user_id: currentUser.type === 'student' ? currentUser.phone : currentUser.facultyName };
             if (currentUser.type === 'faculty' && item.needsCourse) {
-                const courseInfo = COURSE_DATA[currentUser.courseCode];
+                const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
+                const courseInfo = allCourses[currentUser.courseCode];
                 fields.ccode = courseInfo.code;
                 fields.sem = currentUser.semester;
             }
@@ -1350,6 +1961,13 @@
             if (confirm('Are you sure you want to sign out?')) {
                 DOM.loginForm.reset();
                 courseSearchInput.value = ''; // Clear combobox
+                clearManualFields(); // Clear manual entry fields
+                
+                // Reset toggle to student
+                toggleOptions.forEach(opt => opt.classList.remove('active'));
+                toggleOptions[0].classList.add('active'); // First option is student
+                toggleSlider.classList.remove('faculty');
+                
                 document.querySelectorAll('.native-select').forEach(sel => {
                     sel.selectedIndex = 0;
                     sel.dispatchEvent(new Event('change'));
@@ -1362,6 +1980,7 @@
                 DOM.topNavbar.classList.add('hidden');
                 DOM.topNavbar.classList.remove('visible');
                 updateFormForUserType();
+                populateFacultyCombobox(); // Refresh combobox with any new saved courses
                 showSnackbar('Signed out successfully');
             }
         }
@@ -1375,8 +1994,17 @@
                 if (!DOM.inputs.year.value) isValid = showError('year', 'Please select an academic year.');
                 if (!/^\d{10}$/.test(DOM.inputs.studentPhoneNumber.value)) isValid = showError('studentPhone', 'Phone number must be 10 digits.');
             } else { // Faculty validation
-                if (!DOM.inputs.course.value) {
-                    isValid = showError('course', 'Please select a course.');
+                const hasComboboxSelection = !!DOM.inputs.course.value;
+                const manualSemSelect = document.getElementById('manualSemester');
+                const manualYearSelect = document.getElementById('manualYear');
+                const hasManualEntry = DOM.inputs.manualFacultyName.value.trim() &&
+                                      DOM.inputs.manualCourseCode.value.trim() &&
+                                      DOM.inputs.manualCourseName.value.trim() &&
+                                      manualSemSelect.value &&
+                                      manualYearSelect.value;
+                
+                if (!hasComboboxSelection && !hasManualEntry) {
+                    isValid = showError('course', 'Please select a course or fill in all manual fields.');
                 }
             }
             return isValid;
@@ -1404,6 +2032,7 @@
 
         // --- Initial Setup & Observers ---
         function initialize() {
+            // Create custom selects for all native selects except the removed userTypeSelect
             document.querySelectorAll('.native-select').forEach(createCustomSelect);
 
             const currentYear = new Date().getFullYear();
@@ -1412,6 +2041,16 @@
                 yearSelect.value = currentYear.toString();
                 yearSelect.dispatchEvent(new Event('change'));
             }
+            
+            // Set default year for manual entry
+            const manualYearSelect = document.getElementById('manualYear');
+            if (manualYearSelect && Array.from(manualYearSelect.options).some(opt => opt.value == currentYear)) {
+                manualYearSelect.value = currentYear.toString();
+                manualYearSelect.dispatchEvent(new Event('change'));
+            }
+            
+            // Initialize with student view
+            currentUser.type = 'student';
             updateFormForUserType();
             populateFacultyCombobox();
 
