@@ -1,1131 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Portal - Material Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Academic Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* * Material Design 3 (Material You) Color Tokens
-         * Using a blue-based theme.
-         */
         :root {
-            /* Light Theme Colors */
-            color-scheme: light;
-            --md-sys-color-primary: #0061a4;
-            --md-sys-color-on-primary: #ffffff;
-            --md-sys-color-primary-container: #d1e4ff;
-            --md-sys-color-on-primary-container: #001d36;
-            --md-sys-color-secondary: #535f70;
-            --md-sys-color-on-secondary: #ffffff;
-            --md-sys-color-secondary-container: #d7e3f7;
-            --md-sys-color-on-secondary-container: #101c2b;
-            --md-sys-color-error: #ba1a1a;
-            --md-sys-color-on-error: #ffffff;
-            --md-sys-color-error-container: #ffdad6;
-            --md-sys-color-on-error-container: #410002;
-            --md-sys-color-background: #fdfcff;
-            --md-sys-color-on-background: #1a1c1e;
-            --md-sys-color-surface: #fdfcff;
-            --md-sys-color-on-surface: #1a1c1e;
-            --md-sys-color-surface-variant: #dfe3eb;
-            --md-sys-color-on-surface-variant: #42474e;
-            --md-sys-color-outline: #73777f;
-            --md-sys-color-shadow: #000000;
-            --md-sys-color-inverse-surface: #2f3033;
-            --md-sys-color-inverse-on-surface: #f1f0f4;
-            --md-sys-color-surface-container-high: #f2f2f5;
-            --md-sys-color-scrim: rgba(0, 0, 0, 0.4);
+            --bg: #000000;
+            --surface: #1c1c1e;
+            --surface-hover: #2c2c2e;
+            --text-main: #ffffff;
+            --text-muted: #98989d;
+            --accent: #0a84ff;
+            --accent-bg: #ffffff;
+            --accent-text: #000000;
+            --error: #ff453a;
+            --radius: 16px;
+            --font: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                /* Dark Theme Colors */
-                color-scheme: dark;
-                --md-sys-color-primary: #9ecaff;
-                --md-sys-color-on-primary: #003258;
-                --md-sys-color-primary-container: #00497d;
-                --md-sys-color-on-primary-container: #d1e4ff;
-                --md-sys-color-secondary: #bac8db;
-                --md-sys-color-on-secondary: #253141;
-                --md-sys-color-secondary-container: #3b4858;
-                --md-sys-color-on-secondary-container: #d7e3f7;
-                --md-sys-color-error: #ffb4ab;
-                --md-sys-color-on-error: #690005;
-                --md-sys-color-error-container: #93000a;
-                --md-sys-color-on-error-container: #ffdad6;
-                --md-sys-color-background: #1a1c1e;
-                --md-sys-color-on-background: #e2e2e6;
-                --md-sys-color-surface: #1a1c1e;
-                --md-sys-color-on-surface: #e2e2e6;
-                --md-sys-color-surface-variant: #42474e;
-                --md-sys-color-on-surface-variant: #c2c7cf;
-                --md-sys-color-outline: #8c9199;
-                --md-sys-color-shadow: #000000;
-                --md-sys-color-inverse-surface: #e2e2e6;
-                --md-sys-color-inverse-on-surface: #2f3033;
-                --md-sys-color-surface-container-high: #292b2f;
-                --md-sys-color-scrim: rgba(0, 0, 0, 0.6);
-            }
-        }
-
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--md-sys-color-background);
-            color: var(--md-sys-color-on-background);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            font-family: var(--font); background-color: var(--bg); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column;
+            padding: 0; overflow-x: hidden; -webkit-font-smoothing: antialiased;
         }
 
-        /* Card Styles */
-        .md-card {
-            background-color: var(--md-sys-color-surface);
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+        .ambient-glow { display: none; }
+
+        .glass-card {
+            width: 100%; max-width: 440px; margin: 0 auto;
+            padding: 4rem 1.5rem; background: transparent; border: none; box-shadow: none;
+            opacity: 0; transform: translateY(20px);
+            animation: fadeUp 0.6s forwards cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .login-container { margin: auto; }
+        .dashboard-container { margin: 0 auto auto; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Containers */
-        .login-container,
-        .dashboard-container {
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            animation: fadeIn 0.5s ease-out;
-        }
+        .dashboard-container.glass-card { max-width: 800px; padding: 4rem 1.5rem; }
 
-        .dashboard-container {
-            max-width: 1200px;
-        }
+        .hidden { display: none !important; }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
+        h1.main-title { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 0.5rem; text-align: center; }
+        p.subtitle { color: var(--text-muted); font-size: 1.05rem; text-align: center; margin-bottom: 3rem; }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Header & Logo */
-        .logo-container {
-            margin-bottom: 2rem;
-        }
-
-        .logo {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1.5rem;
-            background-color: var(--md-sys-color-primary-container);
-            color: var(--md-sys-color-on-primary-container);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo svg {
-            width: 36px;
-            height: 36px;
-        }
-
-        .main-title {
-            font-size: 1.75rem;
-            font-weight: 500;
-            color: var(--md-sys-color-on-surface);
-            margin-bottom: 0.25rem;
-        }
-
-        .subtitle {
-            font-size: 1rem;
-            color: var(--md-sys-color-on-surface-variant);
-        }
-
-        /* Form Styles */
-        .login-form {
-            margin-top: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        /* Toggle Switch Styles */
-        .toggle-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .toggle-label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--md-sys-color-on-surface-variant);
-            text-align: center;
-        }
-
+        .toggle-container { margin-bottom: 2rem; }
+        .toggle-label { display: none; }
         .toggle-switch-wrapper {
-            position: relative;
-            display: flex;
-            background-color: var(--md-sys-color-surface-variant);
-            border-radius: 24px;
-            padding: 4px;
-            gap: 4px;
+            display: flex; background: var(--surface); border-radius: 100px; padding: 4px; position: relative;
         }
-
         .toggle-option {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: none;
-            background: transparent;
-            color: var(--md-sys-color-on-surface-variant);
-            font-size: 0.875rem;
-            font-weight: 500;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            flex: 1; padding: 0.75rem; border: none; background: transparent;
+            color: var(--text-muted); font-size: 0.9rem; font-weight: 500; cursor: pointer;
+            z-index: 2; position: relative; transition: var(--transition);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
-
-        .toggle-option svg {
-            flex-shrink: 0;
-        }
-
-        .toggle-option.active {
-            color: var(--md-sys-color-on-primary);
-        }
-
+        .toggle-option.active { color: #ffffff; font-weight: 600; }
+        .toggle-option svg { width: 16px; height: 16px; }
         .toggle-slider {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            width: calc(50% - 4px);
-            height: calc(100% - 8px);
-            background-color: var(--md-sys-color-primary);
-            border-radius: 20px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px);
+            background: #636366; border-radius: 100px; z-index: 1;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .toggle-slider.faculty { transform: translateX(calc(100% + 0px)); }
 
-        .toggle-slider.faculty {
-            transform: translateX(calc(100% + 4px));
+        .input-group { position: relative; margin-bottom: 1rem; width: 100%; }
+        
+        .md-input, .md-select-trigger {
+            width: 100%; background: var(--surface); border: none;
+            border-radius: var(--radius); padding: 1.8rem 1.2rem 0.6rem; color: var(--text-main);
+            font-size: 1.05rem; font-family: inherit; font-weight: 500; outline: none;
+            transition: var(--transition); appearance: none; min-height: 3.8rem;
         }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+        .md-input:focus, .md-select-wrapper.open .md-select-trigger, .combobox-wrapper.open .md-input {
+            background: var(--surface-hover);
         }
-
-        /* Material Outlined Input Fields */
-        .input-group {
-            position: relative;
-            text-align: left;
-        }
-
-        .md-input {
-            width: 100%;
-            height: 3.5rem;
-            padding: 1rem;
-            font-size: 1rem;
-            border: 1px solid var(--md-sys-color-outline);
-            border-radius: 4px;
-            background-color: transparent;
-            color: var(--md-sys-color-on-surface);
-            outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
+        
         .input-label {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            font-size: 1rem;
-            color: var(--md-sys-color-on-surface-variant);
-            pointer-events: none;
-            transition: all 0.2s ease;
-            background-color: var(--md-sys-color-surface);
-            padding: 0 0.25rem;
+            position: absolute; left: 1.2rem; top: 1.2rem; color: var(--text-muted);
+            font-size: 1rem; pointer-events: none; transition: var(--transition); z-index: 5;
         }
-
-        .md-input:focus+.input-label,
-        .md-input:not(:placeholder-shown)+.input-label {
-            top: -0.625rem;
-            left: 0.75rem;
-            font-size: 0.75rem;
-            color: var(--md-sys-color-primary);
+        
+        .md-input:focus + .input-label, 
+        .md-input:not(:placeholder-shown) + .input-label,
+        .md-select-wrapper.selected .input-label, 
+        .md-select-wrapper.open .input-label,
+        .combobox-wrapper:focus-within .input-label {
+            top: 0.5rem; font-size: 0.75rem; color: var(--text-muted); font-weight: 500;
         }
-
-        .md-input:focus {
-            border-color: var(--md-sys-color-primary);
-            box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+        .input-group > .input-label { top: 1.2rem; left: 1.2rem; z-index: 5; }
+        .combobox-wrapper:focus-within ~ .input-label,
+        .combobox-wrapper .md-input:not(:placeholder-shown) ~ .input-label,
+        .input-group:focus-within > .input-label,
+        .input-group .md-input:not(:placeholder-shown) ~ .input-label { 
+            top: 0.5rem; font-size: 0.75rem; color: var(--text-muted); font-weight: 500;
         }
-
-        .md-input.invalid,
-        .combobox-wrapper.invalid .md-input {
-            border-color: var(--md-sys-color-error);
+        
+        .md-input::placeholder { color: transparent; }
+        .validation-message { 
+            color: var(--error); font-size: 0.85rem; font-weight: 500;
+            padding: 0.5rem 0.8rem 0; display: none;
         }
-
-        .md-input.invalid+.input-label,
-        .combobox-wrapper.invalid .input-label {
-            color: var(--md-sys-color-error);
+        .validation-message:not(:empty) { display: block; animation: fadeDown 0.3s ease; }
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .md-input.invalid:focus,
-        .combobox-wrapper.invalid .md-input:focus {
-            box-shadow: 0 0 0 1px var(--md-sys-color-error);
-        }
-
-        .validation-message {
-            color: var(--md-sys-color-error);
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-            min-height: 1.2em;
-        }
-
-        .md-input::placeholder {
-            color: transparent;
-        }
-
-        /* --- Custom Select Component Styles --- */
-        .md-select-wrapper {
-            position: relative;
-        }
-
-        .md-select-trigger {
-            width: 100%;
-            height: 3.5rem;
-            padding: 1rem;
-            font-size: 1rem;
-            border: 1px solid var(--md-sys-color-outline);
-            border-radius: 4px;
-            background-color: transparent;
-            color: var(--md-sys-color-on-surface);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-        }
-
-        .md-select-wrapper.open .md-select-trigger {
-            border-color: var(--md-sys-color-primary);
-            box-shadow: 0 0 0 1px var(--md-sys-color-primary);
-        }
-
-        .md-select-wrapper.invalid .md-select-trigger {
-            border-color: var(--md-sys-color-error);
-        }
-
-        .md-select-wrapper.invalid.open .md-select-trigger {
-            box-shadow: 0 0 0 1px var(--md-sys-color-error);
-        }
-
-        .md-select-wrapper .input-label {
-            z-index: 1;
-        }
-
-        .md-select-wrapper.selected .input-label,
-        .md-select-wrapper.open .input-label {
-            top: -0.625rem;
-            left: 0.75rem;
-            font-size: 0.75rem;
-        }
-
-        .md-select-wrapper.open .input-label {
-            color: var(--md-sys-color-primary);
-        }
-
-        .md-select-wrapper.invalid .input-label {
-            color: var(--md-sys-color-error);
-        }
-
+        
+        .md-select-wrapper, .combobox-wrapper { position: relative; width: 100%; }
+        .md-select-trigger { cursor: pointer; display: flex; align-items: center; justify-content: flex-start; }
         .md-select-trigger::after {
-            content: '';
-            border: solid var(--md-sys-color-on-surface-variant);
-            border-width: 0 2px 2px 0;
-            display: inline-block;
-            padding: 3px;
-            transform: rotate(45deg);
-            transition: transform 0.2s ease;
+            content: ''; width: 8px; height: 8px; border-right: 2.5px solid var(--text-muted);
+            border-bottom: 2.5px solid var(--text-muted); transform: translateY(-50%) rotate(45deg);
+            transition: var(--transition); position: absolute; right: 1.5rem; top: 50%;
         }
-
-        .md-select-wrapper.open .md-select-trigger::after {
-            transform: rotate(-135deg);
+        .md-select-wrapper.open .md-select-trigger::after { transform: translateY(-50%) rotate(-135deg); }
+        
+        .md-select-options, .combobox-options {
+            position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+            background: #2c2c2e; border: none;
+            border-radius: 16px; max-height: 220px; overflow-y: auto; z-index: 100;
+            opacity: 0; transform: translateY(-10px); visibility: hidden; transition: var(--transition);
+            padding: 0.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
-
-        .md-select-options {
-            position: absolute;
-            top: calc(100% + 4px);
-            left: 0;
-            right: 0;
-            background-color: var(--md-sys-color-surface-container-high);
-            border-radius: 4px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            max-height: 200px;
-            overflow-y: auto;
-            opacity: 0;
-            transform: translateY(-10px);
-            visibility: hidden;
-            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+        .md-select-wrapper.open .md-select-options, .combobox-wrapper.open .combobox-options {
+            opacity: 1; transform: translateY(0); visibility: visible;
         }
-
-        .md-select-wrapper.open .md-select-options {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
+        .md-select-option, .combobox-option {
+            padding: 0.8rem 1rem; font-size: 1rem; font-weight: 500; border-radius: 12px; cursor: pointer; transition: background 0.2s;
         }
+        .md-select-option:hover, .combobox-option:hover { background: #3a3a3c; }
+        .native-select { display: none; }
 
-        .md-select-option {
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .md-select-option:hover {
-            background-color: rgba(var(--md-sys-color-primary), 0.08);
-        }
-
-        .md-select-option.selected {
-            background-color: rgba(var(--md-sys-color-primary), 0.12);
-            font-weight: 500;
-        }
-
-        .native-select {
-            display: none;
-        }
-
-        /* --- End Custom Select --- */
-
-        /* --- Combobox (Searchable Select) --- */
-        .combobox-wrapper {
-            position: relative;
-        }
-
-        .combobox-options {
-            position: absolute;
-            top: calc(100% + 4px);
-            left: 0;
-            right: 0;
-            background-color: var(--md-sys-color-surface-container-high);
-            border-radius: 4px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            max-height: 200px;
-            overflow-y: auto;
-            opacity: 0;
-            transform: translateY(-10px);
-            visibility: hidden;
-            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-        }
-
-        .combobox-wrapper.open .combobox-options {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
-        }
-
-        .combobox-option {
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .combobox-option:hover {
-            background-color: rgba(var(--md-sys-color-primary), 0.08);
-        }
-
-        /* Filled Button */
         .md-filled-button {
-            width: 100%;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            background-color: var(--md-sys-color-primary);
-            color: var(--md-sys-color-on-primary);
-            border-radius: 20px;
-            /* Pill shape */
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+            width: 100%; background: var(--accent-bg); color: var(--accent-text); border: none;
+            padding: 1.2rem; border-radius: 16px; font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; transition: var(--transition); display: flex; align-items: center;
+            justify-content: center; margin-top: 2.5rem;
         }
+        .md-filled-button:hover { opacity: 0.9; transform: scale(0.98); }
+        .md-filled-button:active { opacity: 0.7; transform: scale(0.96); }
+        .md-filled-button:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .md-text-button {
+            background: transparent; border: none; color: var(--accent); font-size: 0.95rem; font-weight: 500;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            width: 100%; padding: 1rem; transition: opacity 0.2s;
+        }
+        .md-text-button:hover { opacity: 0.8; }
+        .md-text-button.cancel-btn { color: var(--error); }
+        .md-text-button svg { width: 18px; height: 18px; }
 
-        .md-filled-button:hover:not(:disabled) {
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
-            filter: brightness(1.05);
-        }
-
-        .md-filled-button:disabled {
-            background-color: rgba(var(--md-sys-color-on-surface), 0.12);
-            color: rgba(var(--md-sys-color-on-surface), 0.38);
-            box-shadow: none;
-            cursor: not-allowed;
-        }
-
-        .loading-spinner {
-            width: 1em;
-            height: 1em;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            border-right-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Dashboard Styles */
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-            padding: 1rem;
-        }
-
-        .user-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-align: left;
-        }
-
-        .user-avatar {
-            width: 48px;
-            height: 48px;
-            background-color: var(--md-sys-color-secondary-container);
-            color: var(--md-sys-color-on-secondary-container);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .user-avatar svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .user-details h2 {
-            font-size: 1.25rem;
-            font-weight: 500;
-        }
-
-        .user-info {
-            font-size: 0.875rem;
-            color: var(--md-sys-color-on-surface-variant);
-        }
-
-        .sign-out-btn {
-            padding: 0.625rem 1.5rem;
-            background: transparent;
-            color: var(--md-sys-color-primary);
-            border: 1px solid var(--md-sys-color-outline);
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .sign-out-btn:hover {
-            background-color: rgba(var(--md-sys-color-primary), 0.08);
-        }
-
-        /* Menu Grid */
-        .menu-section {
-            padding: 0 1rem;
-        }
-
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1rem;
-        }
-
-        .menu-card {
-            background-color: transparent;
-            border: 1px solid var(--md-sys-color-outline);
-            padding: 1.5rem;
-            cursor: pointer;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-align: left;
-        }
-
-        .menu-card:hover {
-            background-color: rgba(var(--md-sys-color-primary), 0.05);
-            border-color: var(--md-sys-color-primary);
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-        }
-
-        .menu-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--md-sys-color-primary-container);
-            color: var(--md-sys-color-on-primary-container);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .menu-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .menu-title {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-            color: var(--md-sys-color-on-surface-variant);
-        }
-
-        .menu-desc {
-            font-size: 0.875rem;
-            color: var(--md-sys-color-on-surface-variant);
-            line-height: 1.4;
-        }
-
-        /* Faculty Fields */
-        .faculty-fields,
-        .student-fields {
-            display: none;
-        }
-
-        .faculty-fields.show,
-        .student-fields.show {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            animation: fadeIn 0.3s;
-        }
+        .student-fields, .faculty-fields { display: none; }
+        .student-fields.show, .faculty-fields.show { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
 
         .manual-entry-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            background: var(--surface); border-radius: 20px; padding: 1.5rem;
             margin-top: 1rem;
-            padding: 1.5rem;
-            background-color: var(--md-sys-color-surface);
-            border: 1px solid var(--md-sys-color-outline);
-            border-radius: 12px;
-            animation: slideDown 0.3s ease-out;
         }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-                max-height: 0;
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-                max-height: 1000px;
-            }
-        }
-
         .section-divider {
-            text-align: center;
-            position: relative;
-            margin-bottom: 0.5rem;
+            height: 1px; background: rgba(255,255,255,0.1); margin: 1.5rem 0 2rem; position: relative;
+            display: flex; align-items: center; justify-content: center;
         }
-
         .section-divider span {
-            background-color: var(--md-sys-color-surface);
-            padding: 0 1rem;
-            color: var(--md-sys-color-on-surface-variant);
-            font-size: 0.875rem;
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
+            background: var(--surface); padding: 0 1rem; font-size: 0.8rem; color: var(--text-muted);
+            text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;
         }
 
-        .section-divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background-color: var(--md-sys-color-outline);
-            z-index: 0;
-        }
-
-        /* Text Button */
-        .md-text-button {
-            background: none;
-            border: none;
-            color: var(--md-sys-color-primary);
-            font-weight: 500;
-            font-size: 0.875rem;
-            padding: 0.625rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-        }
-
-        .md-text-button:hover {
-            background-color: rgba(var(--md-sys-color-primary), 0.08);
-        }
-
-        .md-text-button.cancel-btn {
-            color: var(--md-sys-color-error);
-        }
-
-        .md-text-button.cancel-btn:hover {
-            background-color: rgba(var(--md-sys-color-error), 0.08);
-        }
-
-        .md-text-button svg {
-            flex-shrink: 0;
-        }
-
-        /* Saved Courses List */
-        .saved-courses-section {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background-color: var(--md-sys-color-primary-container);
-            border-radius: 12px;
-        }
-
-        .saved-courses-title {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--md-sys-color-on-primary-container);
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .saved-courses-title svg {
-            width: 18px;
-            height: 18px;
-        }
-
+        .saved-courses-section { margin-bottom: 1.5rem; }
+        .saved-courses-title { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .saved-courses-title svg { width: 16px; height: 16px; }
         .saved-course-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.875rem;
-            background-color: var(--md-sys-color-surface);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 1.2rem; background: var(--surface); border-radius: 16px; margin-bottom: 0.5rem; cursor: pointer; transition: var(--transition);
         }
-
-        .saved-course-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .saved-course-item:hover {
-            border-color: var(--md-sys-color-primary);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .saved-course-item.selected {
-            border-color: var(--md-sys-color-primary);
-            background-color: rgba(var(--md-sys-color-primary), 0.08);
-        }
-
-        .saved-course-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .saved-course-name {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--md-sys-color-on-surface);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .saved-course-details {
-            font-size: 0.75rem;
-            color: var(--md-sys-color-on-surface-variant);
-            margin-top: 0.25rem;
-        }
-
+        .saved-course-item:hover, .saved-course-item.selected { background: var(--surface-hover); }
+        .saved-course-info { flex: 1; }
+        .saved-course-name { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; color: var(--text-main); }
+        .saved-course-details { font-size: 0.85rem; color: var(--text-muted); }
         .delete-course-btn {
-            background: none;
-            border: none;
-            color: var(--md-sys-color-error);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s ease;
-            flex-shrink: 0;
-            margin-left: 0.5rem;
-            opacity: 0;
+            background: transparent; border: none; color: var(--error); cursor: pointer;
+            width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            opacity: 0.8; transition: var(--transition); flex-shrink: 0; margin-left: 0.5rem;
         }
+        .delete-course-btn svg { width: 22px; height: 22px; }
+        .delete-course-btn:hover { opacity: 1; background: rgba(255, 69, 58, 0.1); transform: scale(1.05); }
 
-        .saved-course-item:hover .delete-course-btn {
-            opacity: 1;
+        .dashboard-header {
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            margin-bottom: 3rem; padding-bottom: 0; border-bottom: none;
         }
-
-        .delete-course-btn:hover {
-            background-color: rgba(var(--md-sys-color-error), 0.12);
+        .user-section { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; margin-bottom: 1.5rem; width: 100%; }
+        .user-details h2 { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 0.3rem; }
+        .user-info-split { display: flex; flex-direction: column; gap: 0.2rem; }
+        .info-primary { font-size: 1.05rem; font-weight: 500; color: var(--text-muted); }
+        .info-secondary { font-size: 0.95rem; color: var(--text-muted); }
+        
+        .sign-out-btn {
+            background: rgba(255, 69, 58, 0.1); border: none; color: var(--error);
+            padding: 0.8rem 2rem; border-radius: 100px; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; transition: var(--transition); display: inline-block;
         }
+        .sign-out-btn:hover { background: rgba(255, 69, 58, 0.2); transform: scale(0.96); }
 
-        .delete-course-btn svg {
-            width: 18px;
-            height: 18px;
+        .section-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+        .menu-card {
+            background: var(--surface); border-radius: 20px; padding: 1.5rem; cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; gap: 1.25rem; border: none; box-shadow: none;
         }
-
-        /* Snackbar (Notification) */
-        .snackbar-container {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: center;
+        .menu-card:hover { transform: scale(0.98); background: var(--surface-hover); }
+        .menu-icon {
+            width: 52px; height: 52px; border-radius: 14px; background: #2c2c2e;
+            display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0;
         }
+        .menu-icon svg { width: 24px; height: 24px; }
+        .menu-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .menu-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.3; }
 
-        .snackbar {
-            padding: 0.875rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 500;
-            background-color: var(--md-sys-color-inverse-surface);
-            color: var(--md-sys-color-inverse-on-surface);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            animation: slideUp 0.3s ease-out;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* --- Dynamic Top Navbar --- */
-        .top-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 0.5rem 1.5rem;
-            min-height: 4rem;
-            /* 64px standard M3 height */
-            z-index: 500;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transform: translateY(-100%);
-            opacity: 0;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-            visibility: hidden;
-
-            background-color: var(--md-sys-color-surface);
-            background-image: linear-gradient(hsla(from var(--md-sys-color-primary) h s l / 0.08),
-                    hsla(from var(--md-sys-color-primary) h s l / 0.08));
-        }
-
-        .top-navbar.visible {
-            transform: translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #topNavAvatar {
-            width: 32px;
-            height: 32px;
-            background-color: var(--md-sys-color-secondary-container);
-            color: var(--md-sys-color-on-secondary-container);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        #topNavAvatar svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        #topNavUserInfo {
-            flex-grow: 1;
-            min-width: 0;
-            /* Important for flexbox ellipsis */
-        }
-
-        /* New two-line display styles */
-        .user-info-split {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.3;
-        }
-
-        .info-primary,
-        .info-secondary {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 100%;
-        }
-
-        .info-primary {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--md-sys-color-on-surface);
-        }
-
-        .info-secondary {
-            font-size: 0.75rem;
-            color: var(--md-sys-color-on-surface-variant);
-        }
-
-        /* --- Semester Modal --- */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: var(--md-sys-color-scrim);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            display: flex; align-items: center; justify-content: center; z-index: 1000;
+            opacity: 0; visibility: hidden; transition: var(--transition);
         }
-
-        .modal-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
         .modal-content {
-            background-color: var(--md-sys-color-surface-container-high);
-            border-radius: 1.75rem;
-            /* 28px */
-            padding: 1.5rem;
-            width: 90%;
-            max-width: 320px;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+            background: #1c1c1e; border: none; border-radius: 24px;
+            padding: 2.5rem; width: 90%; max-width: 380px; text-align: center;
+            transform: scale(0.95); transition: var(--transition);
         }
-
-        .modal-overlay.visible .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: var(--md-sys-color-on-surface);
-        }
-
-        .semester-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem; }
+        .semester-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
         .semester-button {
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            border: 1px solid var(--md-sys-color-outline);
-            background-color: transparent;
-            color: var(--md-sys-color-primary);
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            aspect-ratio: 1; border-radius: 50%; border: none; background: #2c2c2e;
+            color: var(--text-main); font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; justify-content: center;
         }
-
-        .semester-button:hover {
-            background-color: rgba(var(--md-sys-color-primary), 0.08);
-        }
-
-        .modal-actions {
-            margin-top: 1.5rem;
-            text-align: right;
-        }
-
+        .semester-button:hover { background: #3a3a3c; }
         .modal-close-btn {
-            background: none;
-            border: none;
-            color: var(--md-sys-color-primary);
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
+            background: transparent; border: none; color: var(--accent); font-size: 1.05rem; font-weight: 600;
+            cursor: pointer; transition: opacity 0.2s;
         }
+        .modal-close-btn:hover { opacity: 0.8; }
+        
+        .alert-dialog { padding: 0; max-width: 320px; text-align: center; overflow: hidden; background: #1c1c1e; }
+        .alert-dialog .modal-title { font-size: 1.15rem; font-weight: 600; padding: 1.5rem 1rem 0.5rem; margin: 0; }
+        .alert-message { font-size: 0.9rem; color: var(--text-muted); padding: 0 1.5rem 1.5rem; line-height: 1.4; }
+        .alert-actions { display: flex; border-top: 1px solid rgba(255,255,255,0.1); }
+        .alert-btn {
+            flex: 1; padding: 1rem; background: transparent; border: none; font-size: 1.05rem; font-weight: 500;
+            color: var(--accent); cursor: pointer; transition: background 0.2s;
+        }
+        .alert-btn:hover { background: rgba(255,255,255,0.05); }
+        .alert-btn.cancel { border-right: 1px solid rgba(255,255,255,0.1); font-weight: 400; color: var(--text-main); }
+        .alert-btn.confirm { color: var(--error); font-weight: 600; }
 
-        /* Responsive Design */
+        .snackbar-container { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 0.5rem; }
+        .snackbar {
+            background: #2c2c2e; color: #ffffff; padding: 1rem 1.5rem; border-radius: 100px;
+            font-size: 0.95rem; font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: snackIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes snackIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        .loading-spinner { width: 20px; height: 20px; border: 3px solid rgba(0,0,0,0.2); border-right-color: #000; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         @media (max-width: 768px) {
-            body {
-                padding: 1rem 0.5rem;
-                align-items: flex-start;
-            }
-
-            .md-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .login-container {
-                max-width: 100%;
-                margin-top: 1rem;
-            }
-
-            .dashboard-header {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
-            }
-
-            .user-section {
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: center;
-            }
-
-            .section-title {
-                text-align: center;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .user-info-split {
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-
-            .form-row,
-            .faculty-fields .form-row {
-                grid-template-columns: 1fr;
-            }
+            body { align-items: flex-start; }
+            .glass-card { padding: 3rem 1.5rem; }
+            .menu-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .sign-out-btn { width: 100%; text-align: center; }
         }
     </style>
 </head>
-
 <body>
-    <div id="topNavbar" class="top-navbar hidden">
-        <div id="topNavAvatar"></div>
-        <div id="topNavUserInfo"></div>
-    </div>
+    <div class="ambient-glow"></div>
 
-    <div id="loginContainer" class="login-container md-card">
-        <div class="logo-container">
-            <div class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 3L1 9L12 15L23 9L12 3ZM5 10.18V15.21L12 18.84L19 15.21V10.18L12 13.81L5 10.18Z" />
-                </svg>
-            </div>
-            <h1 class="main-title">Academic Portal</h1>
-            <p class="subtitle">Unified access for faculty and students</p>
-        </div>
+    <!-- Hidden top nav elements to keep JS happy -->
+    <div id="topNavbar" class="hidden"><div id="topNavAvatar"></div><div id="topNavUserInfo"></div></div>
+
+    <div id="loginContainer" class="login-container glass-card">
+        <h1 class="main-title">Academic Portal</h1>
+        <p class="subtitle">Unified access for faculty and students</p>
 
         <form id="loginForm" class="login-form" novalidate>
-            <!-- Animated Toggle Switch -->
             <div class="toggle-container">
-                <div class="toggle-label">Login As</div>
                 <div class="toggle-switch-wrapper">
                     <button type="button" class="toggle-option active" data-value="student">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5A2.5 2.5 0 0 1 4 19.5v0Z"/>
                             <path d="M15 2v10.54a2.5 2.5 0 1 1-4 0V2"/>
                         </svg>
                         Student
                     </button>
                     <button type="button" class="toggle-option" data-value="faculty">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2v6h6"/>
-                            <path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/>
-                            <path d="M8 12h2"/>
-                            <path d="M8 16h8"/>
-                            <path d="M12 12h4"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2v6h6"/><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/>
+                            <path d="M8 12h2"/><path d="M8 16h8"/><path d="M12 12h4"/>
                         </svg>
                         Faculty
                     </button>
@@ -1133,10 +322,9 @@
                 </div>
             </div>
 
-            <div id="studentFields" class="student-fields">
+            <div id="studentFields" class="student-fields show">
                 <div class="form-row">
                     <div class="input-group">
-                        <label for="year" class="input-label">Academic Year</label>
                         <select id="year" class="native-select" required>
                             <option value="" disabled selected></option>
                             <option value="2022">2022</option>
@@ -1144,11 +332,11 @@
                             <option value="2024">2024</option>
                             <option value="2025">2025</option>
                         </select>
+                        <label for="year" class="input-label">Academic Year</label>
                         <div id="yearError" class="validation-message"></div>
                     </div>
                     <div class="input-group">
-                        <input type="tel" id="studentPhoneNumber" class="md-input" placeholder="Enter 10-digit number"
-                            required pattern="\d{10}">
+                        <input type="tel" id="studentPhoneNumber" class="md-input" placeholder=" " required pattern="\d{10}">
                         <label for="studentPhoneNumber" class="input-label">Phone Number</label>
                         <div id="studentPhoneError" class="validation-message"></div>
                     </div>
@@ -1156,35 +344,28 @@
             </div>
 
             <div id="facultyFields" class="faculty-fields">
-                <!-- Saved Courses Section (shown first) -->
                 <div id="savedCoursesContainer"></div>
                 
-                <!-- Course Selection -->
-                <div class="input-group">
-                    <label for="courseSearch" class="input-label">Select Existing Course</label>
+                <div class="input-group" style="margin-bottom: 0.5rem;">
                     <div class="combobox-wrapper">
-                        <input type="text" id="courseSearch" class="md-input"
-                            placeholder="Search for a course..." autocomplete="off">
+                        <input type="text" id="courseSearch" class="md-input" placeholder=" " autocomplete="off">
+                        <label for="courseSearch" class="input-label">Select Course</label>
                         <div class="combobox-options"></div>
                         <input type="hidden" id="course" name="course" required>
                     </div>
                     <div id="courseError" class="validation-message"></div>
                 </div>
                 
-                <!-- Add New Course Button -->
                 <button type="button" id="toggleManualEntryBtn" class="md-text-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     Add New Course
                 </button>
                 
-                <!-- Manual Entry Section (hidden by default) -->
                 <div id="manualEntrySection" class="manual-entry-section hidden">
-                    <div class="section-divider">
-                        <span>New Course Details</span>
-                    </div>
+                    <div class="section-divider"><span>New Course</span></div>
                     
                     <div class="form-row">
                         <div class="input-group">
@@ -1204,54 +385,42 @@
                     
                     <div class="form-row">
                         <div class="input-group">
-                            <label for="manualSemester" class="input-label">Semester</label>
                             <select id="manualSemester" class="native-select">
                                 <option value="" disabled selected></option>
-                                <option value="1">Semester 1</option>
-                                <option value="2">Semester 2</option>
-                                <option value="3">Semester 3</option>
-                                <option value="4">Semester 4</option>
-                                <option value="5">Semester 5</option>
-                                <option value="6">Semester 6</option>
+                                <option value="1">Sem 1</option><option value="2">Sem 2</option>
+                                <option value="3">Sem 3</option><option value="4">Sem 4</option>
+                                <option value="5">Sem 5</option><option value="6">Sem 6</option>
                             </select>
+                            <label for="manualSemester" class="input-label">Semester</label>
                         </div>
                         <div class="input-group">
-                            <label for="manualYear" class="input-label">Academic Year</label>
                             <select id="manualYear" class="native-select">
                                 <option value="" disabled selected></option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
+                                <option value="2022">2022</option><option value="2023">2023</option>
+                                <option value="2024">2024</option><option value="2025">2025</option>
                                 <option value="2026">2026</option>
                             </select>
+                            <label for="manualYear" class="input-label">Year</label>
                         </div>
                     </div>
                     
-                    <button type="button" id="cancelManualEntryBtn" class="md-text-button cancel-btn">
-                        Cancel
-                    </button>
+                    <button type="button" id="cancelManualEntryBtn" class="md-text-button cancel-btn">Cancel</button>
                 </div>
             </div>
 
-            <button type="submit" class="md-filled-button" id="loginBtn">
-                Access Dashboard
-            </button>
+            <button type="submit" class="md-filled-button" id="loginBtn">Access Portal</button>
         </form>
     </div>
 
-    <div id="dashboardContainer" class="dashboard-container md-card hidden">
+    <div id="dashboardContainer" class="dashboard-container glass-card hidden">
         <div id="dashboardHeader" class="dashboard-header">
             <div class="user-section">
-                <div class="user-avatar" id="userAvatar"></div>
                 <div class="user-details">
                     <h2 id="welcomeMessage">Welcome back!</h2>
                     <div class="user-info" id="userInfoDisplay"></div>
                 </div>
             </div>
-            <button class="sign-out-btn" onclick="signOut()">
-                Sign Out
-            </button>
+            <button class="sign-out-btn" onclick="signOut()">Sign Out</button>
         </div>
 
         <div class="menu-section">
@@ -1273,8 +442,17 @@
                 <button class="semester-button" data-sem="5">5</button>
                 <button class="semester-button" data-sem="6">6</button>
             </div>
-            <div class="modal-actions">
-                <button id="modalCloseBtn" class="modal-close-btn">CANCEL</button>
+            <button id="modalCloseBtn" class="modal-close-btn">Cancel</button>
+        </div>
+    </div>
+
+    <div id="alertDialog" class="modal-overlay">
+        <div class="modal-content alert-dialog">
+            <h2 class="modal-title" id="alertTitle">Are you sure?</h2>
+            <p class="alert-message" id="alertMessage">This action cannot be undone.</p>
+            <div class="alert-actions">
+                <button id="alertCancelBtn" class="alert-btn cancel">Cancel</button>
+                <button id="alertConfirmBtn" class="alert-btn confirm">Delete</button>
             </div>
         </div>
     </div>
@@ -1282,23 +460,23 @@
     <script>
         // --- UNIFIED AND OPTIMIZED DATA SOURCE ---
         const COURSE_DATA = {
-        //     '724111_4': { code: '724111', name: 'Database Management System', coordinator: 'Roopa Kumari', sem: '4', year: '2024' },
-        //     '724112_4': { code: '724112', name: 'Numerical and Statistical Computing', coordinator: 'Kamini Bhatt', sem: '4', year: '2024' },
-        //     '724113_4': { code: '724113', name: 'Design Algorithms and Analysis of algorithms', coordinator: 'Yashvi Uniyal', sem: '4', year: '2024' },
-            // // '724211_4': { code: '724211', name: 'Server-side Web Technologies', coordinator: 'Narender Kumar', sem: '4', year: '2024' },
-            // '724211_4': { code: '724211', name: 'Server-side Web Technologies', coordinator: 'Mr. Ashutosh Kumar Singh', sem: '4', year: '2024' },
-            // '100621_4': { code: '100621', name: 'Mathematical ability for Competitive Exam', coordinator: 'Dr. Priyank Singh', sem: '4', year: '2024' },    
-            // '100514_4': { code: '100514', name: 'Spanish Language -II', coordinator: 'Ms. Shreya Rawat', sem: '4', year: '2024' },    
-            // '100533_4': { code: '100533', name: 'Hindi Language -II', coordinator: 'Kuldeep Chand Ramola', sem: '4', year: '2024' },
+            '724111_4': { code: '724111', name: 'Database Management System', coordinator: 'Roopa Kumari', sem: '4', year: '2024' },
+            '724112_4': { code: '724112', name: 'Numerical and Statistical Computing', coordinator: 'Kamini Bhatt', sem: '4', year: '2024' },
+            '724113_4': { code: '724113', name: 'Design Algorithms and Analysis of algorithms', coordinator: 'Yashvi Uniyal', sem: '4', year: '2024' },
+            // '724211_4': { code: '724211', name: 'Server-side Web Technologies', coordinator: 'Narender Kumar', sem: '4', year: '2024' },
+            '724211_4': { code: '724211', name: 'Server-side Web Technologies', coordinator: 'Mr. Ashutosh Kumar Singh', sem: '4', year: '2024' },
+            '100621_4': { code: '100621', name: 'Mathematical ability for Competitive Exam', coordinator: 'Dr. Priyank Singh', sem: '4', year: '2024' },    
+            '100514_4': { code: '100514', name: 'Spanish Language -II', coordinator: 'Ms. Shreya Rawat', sem: '4', year: '2024' },    
+            '100533_4': { code: '100533', name: 'Hindi Language -II', coordinator: 'Kuldeep Chand Ramola', sem: '4', year: '2024' },
 
             // // HER SUBJECTS 💞   
-            // '722121_2': { code: '722121', name: 'Computer Architecture', coordinator: 'Ishaan Dhawar', sem: '2', year: '2025' },   
-            // '722122_2': { code: '722122', name: 'Discrete Mathematics', coordinator: 'Ashutosh Kumar Singh', sem: '2', year: '2025' },   
-            // '722123_2': { code: '722123', name: 'Fundamentals of Electronics', coordinator: 'Reenu Saini', sem: '2', year: '2025' },   
-            // '722421_2': { code: '722421', name: 'Optimization Techniques', coordinator: 'Dr. Mukesh Kumar', sem: '2', year: '2025' },   
-            // '742412_2': { code: '742412', name: 'Electrical Circuit Analysis', coordinator: 'Priyanka Bishnoi', sem: '2', year: '2025' },   
-            // '100532_2': { code: '100532', name: 'Communicative English', coordinator: 'APORWA', sem: '2', year: '2025' }, 
-            // '100610_2': { code: '100610', name: 'Environmental Studies', coordinator: 'Rommila chandra', sem: '2', year: '2025' },
+            '722121_2': { code: '722121', name: 'Computer Architecture', coordinator: 'Ishaan Dhawar', sem: '2', year: '2025' },   
+            '722122_2': { code: '722122', name: 'Discrete Mathematics', coordinator: 'Ashutosh Kumar Singh', sem: '2', year: '2025' },   
+            '722123_2': { code: '722123', name: 'Fundamentals of Electronics', coordinator: 'Reenu Saini', sem: '2', year: '2025' },   
+            '722421_2': { code: '722421', name: 'Optimization Techniques', coordinator: 'Dr. Mukesh Kumar', sem: '2', year: '2025' },   
+            '742412_2': { code: '742412', name: 'Electrical Circuit Analysis', coordinator: 'Priyanka Bishnoi', sem: '2', year: '2025' },   
+            '100532_2': { code: '100532', name: 'Communicative English', coordinator: 'APORWA', sem: '2', year: '2025' }, 
+            '100610_2': { code: '100610', name: 'Environmental Studies', coordinator: 'Rommila chandra', sem: '2', year: '2025' },
             
             // Lamput   
             '412211_2': { code: '412211', name: 'Elementary Chinese Reading-II', coordinator: 'Madhurendra Jha', sem: '2', year: '2025' },   
@@ -1306,36 +484,35 @@
             '100518_2': { code: '100518', name: 'French II', coordinator: 'Neelma Misra', sem: '2', year: '2025' },
 
             // Harshit's Subjects
-            // '724121_4': { code: '724121', name: 'DBMS Btech', coordinator: 'Roopa Kumari', sem: '4', year: '2024' },
-            // '724122_4': { code: '724122', name: 'Numerical Btech', coordinator: 'Kamini Bhatt', sem: '4', year: '2024' },
-            // '724123_4': { code: '724123', name: 'DAA Btech', coordinator: 'Yashvi Uniyal', sem: '4', year: '2024' },
-            // '724221_4': { code: '724221', name: 'Web Tech Btech', coordinator: 'Mr. Ashutosh Kumar Singh', sem: '4', year: '2024' },
-            // '724312_4': { code: '724312', name: 'DataScience Btech', coordinator: 'Kamal Rawal', sem: '4', year: '2024' },
+            '724121_4': { code: '724121', name: 'DBMS Btech', coordinator: 'Roopa Kumari', sem: '4', year: '2024' },
+            '724122_4': { code: '724122', name: 'Numerical Btech', coordinator: 'Kamini Bhatt', sem: '4', year: '2024' },
+            '724123_4': { code: '724123', name: 'DAA Btech', coordinator: 'Yashvi Uniyal', sem: '4', year: '2024' },
+            '724221_4': { code: '724221', name: 'Web Tech Btech', coordinator: 'Mr. Ashutosh Kumar Singh', sem: '4', year: '2024' },
+            '724312_4': { code: '724312', name: 'DataScience Btech', coordinator: 'Kamal Rawal', sem: '4', year: '2024' },
 
             // // Ass Meat Subjects
-            // '454111_4': { code: '454111', name: 'Spoken Japanese', coordinator: 'Ms. Shinobu Narikawa', sem: '4', year: '2024' },
-            // '454112_4': { code: '454112', name: 'Intermediate Text & Grammar – II', coordinator: 'Ms. Shinobu Narikawa', sem: '4', year: '2024' },
-            // '454113_4': { code: '454113', name: 'Translation- II', coordinator: 'Ms. Kanchan Kukreti', sem: '4', year: '2024' },
-            // '454211_4': { code: '454211', name: 'Composition writing II', coordinator: 'Anjali Nautiyal', sem: '4', year: '2024' },
-            // '454411_4': { code: '454411', name: 'Introduction to Japanese History - II', coordinator: 'Soniya Ramanand Wasnik', sem: '4', year: '2024' },
+            '454111_4': { code: '454111', name: 'Spoken Japanese', coordinator: 'Ms. Shinobu Narikawa', sem: '4', year: '2024' },
+            '454112_4': { code: '454112', name: 'Intermediate Text & Grammar – II', coordinator: 'Ms. Shinobu Narikawa', sem: '4', year: '2024' },
+            '454113_4': { code: '454113', name: 'Translation- II', coordinator: 'Ms. Kanchan Kukreti', sem: '4', year: '2024' },
+            '454211_4': { code: '454211', name: 'Composition writing II', coordinator: 'Anjali Nautiyal', sem: '4', year: '2024' },
+            '454411_4': { code: '454411', name: 'Introduction to Japanese History - II', coordinator: 'Soniya Ramanand Wasnik', sem: '4', year: '2024' },
 
             //Semalti Subjects
-            // '434112_4': { code: '434112', name: 'French through Creative Activities-IV', coordinator: 'Diksha Dangwal', sem: '4', year: '2024' },
+            '434112_4': { code: '434112', name: 'French through Creative Activities-IV', coordinator: 'Diksha Dangwal', sem: '4', year: '2024' },
 
             // Extra Subjects I added because I felt bad for someone!
-            // '100611_2': { code: '100611', name: 'UHV', coordinator: 'nemo', sem: '2', year: '2025' },
-            // '842211_2': { code: '842211', name: 'Experimentation in Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
-            // '842113_2': { code: '842113', name: 'Biopsychology', coordinator: 'nemo', sem: '2', year: '2025' },
-            // '842211_2': { code: '842211', name: 'Experimentation in Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
-            // '842111_2': { code: '842111', name: 'Life span development', coordinator: 'nemo', sem: '2', year: '2025' },
-            // '842112_2': { code: '842112', name: 'Health Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
-            // '112111_2': { code: '112111', name: 'Chemistry II', coordinator: 'Jyotsna Singh', sem: '1', year: '2025' },
+            '100611_2': { code: '100611', name: 'UHV', coordinator: 'nemo', sem: '2', year: '2025' },
+            '842211_2': { code: '842211', name: 'Experimentation in Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
+            '842113_2': { code: '842113', name: 'Biopsychology', coordinator: 'nemo', sem: '2', year: '2025' },
+            '842211_2': { code: '842211', name: 'Experimentation in Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
+            '842111_2': { code: '842111', name: 'Life span development', coordinator: 'nemo', sem: '2', year: '2025' },
+            '842112_2': { code: '842112', name: 'Health Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
+            '112111_2': { code: '112111', name: 'Chemistry II', coordinator: 'Jyotsna Singh', sem: '1', year: '2025' },
 
             //EMERGENCY
-            // '731112_2': { code: '731112', name: 'Algebra sem 1', coordinator: 'sarita singh', sem: '1', year: '2023' },
+            '731112_2': { code: '731112', name: 'Algebra sem 1', coordinator: 'sarita singh', sem: '1', year: '2023' },
         };
 
-        // --- CUSTOM SELECT COMPONENT LOGIC ---
         function createCustomSelect(selectElement) {
             const wrapper = document.createElement('div');
             wrapper.className = 'md-select-wrapper';
@@ -1349,10 +526,14 @@
 
             wrapper.appendChild(trigger);
             wrapper.appendChild(optionsContainer);
-            wrapper.appendChild(selectElement); // Move native select inside
+            wrapper.appendChild(selectElement);
 
-            const label = document.querySelector(`label[for='${selectElement.id}']`);
-            if (label) wrapper.insertBefore(label, trigger);
+            // Move the label inside the wrapper to apply focus styles
+            const group = wrapper.closest('.input-group');
+            if(group) {
+                const label = group.querySelector('.input-label');
+                if(label) wrapper.appendChild(label);
+            }
 
             const updateTriggerText = () => {
                 const selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -1379,9 +560,7 @@
             trigger.addEventListener('click', () => wrapper.classList.toggle('open'));
 
             document.addEventListener('click', (e) => {
-                if (!wrapper.contains(e.target)) {
-                    wrapper.classList.remove('open');
-                }
+                if (!wrapper.contains(e.target)) wrapper.classList.remove('open');
             });
 
             selectElement.addEventListener('change', updateTriggerText);
@@ -1389,8 +568,6 @@
             return wrapper;
         }
 
-
-        // --- APPLICATION LOGIC ---
         const DOM = {
             loginContainer: document.getElementById('loginContainer'),
             dashboardContainer: document.getElementById('dashboardContainer'),
@@ -1432,9 +609,7 @@
             }
         };
 
-        let currentUser = {
-            type: 'student', phone: '', year: '', courseCode: '', semester: '', facultyName: ''
-        };
+        let currentUser = { type: 'student', phone: '', year: '', courseCode: '', semester: '', facultyName: '' };
 
         const icons = {
             password: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`,
@@ -1451,65 +626,54 @@
             examDuty: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V2l-2.5 2.5"/><path d="M12 22v-6"/><path d="m22 12-6-6"/><path d="m3.5 10.5 7 7"/><path d="m2 12 6 6"/><path d="M12 2h.01"/></svg>`,
             questionBank: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.25 2.25a2.25 2.25 0 0 1 3.18 0 .12.12 0 0 0 .17 0l1.2-1.2a.12.12 0 0 0 0-.17A2.25 2.25 0 0 1 19.82.88a2.25 2.25 0 0 1 3.18 3.18.12.12 0 0 0 .17 0l1.2-1.2a.12.12 0 0 0 0-.17 2.25 2.25 0 0 1-.02-3.2"/><path d="M14 18a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v4h10v-4Z"/><circle cx="10" cy="10" r="4"/><path d="m14 2-5 5"/></svg>`,
             marks: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
-            avatarStudent: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5A2.5 2.5 0 0 1 4 19.5v0Z"/><path d="M15 2v10.54a2.5 2.5 0 1 1-4 0V2"/></svg>`,
-            avatarFaculty: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6h6"/><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M8 12h2"/><path d="M8 16h8"/><path d="M12 12h4"/></svg>`,
-            delete: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`,
-            bookmark: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>`,
+            avatarStudent: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5A2.5 2.5 0 0 1 4 19.5v0Z"/><path d="M15 2v10.54a2.5 2.5 0 1 1-4 0V2"/></svg>`,
+            avatarFaculty: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6h6"/><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M8 12h2"/><path d="M8 16h8"/><path d="M12 12h4"/></svg>`,
+            delete: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>`,
+            bookmark: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>`
         };
 
         const studentMenuItems = [
-            { icon: icons.password, title: 'Change Password', desc: 'Update your account security credentials', action: 'changepwd.php', method: 'POST' },
-            { icon: icons.profile, title: 'Personal Details', desc: 'Manage your personal information and profile', action: 'app_add.php', method: 'POST' },
-            { icon: icons.parents, title: 'Parent Information', desc: 'View and update parent/guardian details', action: 'app_parent.php', method: 'POST' },
-            { icon: icons.course, title: 'Course Information', desc: 'Access your enrolled courses and details', action: 'app_exam.php', method: 'POST' },
-            { icon: icons.results, title: 'View Semester Results', desc: 'Check your academic performance by semester', special: 'semester_results' },
-            { icon: icons.schedule, title: 'Class Schedule', desc: 'View your weekly timetable and classes', action: 'timetable.php', method: 'POST' },
-            { icon: icons.attendance, title: 'Attendance Record', desc: 'Track your class attendance history', action: 'att.php', method: 'POST' },
-            { icon: icons.syllabus, title: 'Syllabus Progress', desc: 'Check completed syllabus coverage', action: 'att_syllabus.php', method: 'POST' },
-            { icon: icons.leave, title: 'Leave Application', desc: 'Submit requests for academic leave', action: 'app_leave.php', method: 'POST' },
-            { icon: icons.examForm, title: 'Exam Form', desc: 'Download and print your exam forms', action: 'exam.php', method: 'POST' },
-            { icon: icons.feedback, title: 'Course Feedback', desc: 'Provide feedback on courses and faculty', action: 'feedback.php', method: 'POST' }
-        ];
-        const facultyMenuItems = [
             { icon: icons.password, title: 'Change Password', desc: 'Update your security credentials', action: 'changepwd.php', method: 'POST' },
-            { icon: icons.examDuty, title: 'Exam Duty', desc: 'View and manage examination duties', action: 'control/exam_dutyf.php', method: 'GET', special: 'exam_duty' },
-            { icon: icons.schedule, title: 'Time Table', desc: 'Access your teaching schedule', action: 'timetablef.php', method: 'POST' },
-            { icon: icons.attendance, title: 'Course Attendance', desc: 'Manage student attendance records', action: 'attendance_date.php', method: 'POST', needsCourse: true },
-            { icon: icons.questionBank, title: 'Question Bank', desc: 'Access and manage question banks', action: 'q_bank.php', method: 'POST', needsCourse: true },
-            { icon: icons.marks, title: 'Midterm Marks', desc: 'Enter and update midterm exam marks', action: 'midterm.php', method: 'POST', needsCourse: true },
-            { icon: icons.marks, title: 'Internal/Assignment Marks', desc: 'Manage internal assessment marks', action: 'internal.php', method: 'POST', needsCourse: true },
-            { icon: icons.marks, title: 'Practical/Oral Exam Marks', desc: 'Enter practical and oral exam marks', action: 'practical.php', method: 'POST', needsCourse: true },
-            { icon: icons.results, title: 'Marks Distribution', desc: 'View marks distribution analytics', action: 'marksd.php', method: 'POST', needsCourse: true },
-            { icon: icons.results, title: 'Total Marks', desc: 'Calculate and view total student marks', action: 'totalmarks.php', method: 'POST', needsCourse: true }
+            { icon: icons.profile, title: 'Personal Details', desc: 'Manage your personal info', action: 'app_add.php', method: 'POST' },
+            { icon: icons.parents, title: 'Parent Info', desc: 'View parent/guardian details', action: 'app_parent.php', method: 'POST' },
+            { icon: icons.course, title: 'Course Info', desc: 'Access your enrolled courses', action: 'app_exam.php', method: 'POST' },
+            { icon: icons.results, title: 'Semester Results', desc: 'Check academic performance', special: 'semester_results' },
+            { icon: icons.schedule, title: 'Class Schedule', desc: 'View your weekly timetable', action: 'timetable.php', method: 'POST' },
+            { icon: icons.attendance, title: 'Attendance', desc: 'Track class attendance', action: 'att.php', method: 'POST' },
+            { icon: icons.syllabus, title: 'Syllabus Progress', desc: 'Check syllabus coverage', action: 'att_syllabus.php', method: 'POST' },
+            { icon: icons.leave, title: 'Leave Application', desc: 'Submit academic leave', action: 'app_leave.php', method: 'POST' },
+            { icon: icons.examForm, title: 'Exam Form', desc: 'Download your exam forms', action: 'exam.php', method: 'POST' },
+            { icon: icons.feedback, title: 'Feedback', desc: 'Provide course feedback', action: 'feedback.php', method: 'POST' }
         ];
 
-        // --- Event Listeners ---
-        // Toggle switch for user type
+        const facultyMenuItems = [
+            { icon: icons.password, title: 'Change Password', desc: 'Update credentials', action: 'changepwd.php', method: 'POST' },
+            { icon: icons.examDuty, title: 'Exam Duty', desc: 'Manage exam duties', action: 'control/exam_dutyf.php', method: 'GET', special: 'exam_duty' },
+            { icon: icons.schedule, title: 'Time Table', desc: 'Access teaching schedule', action: 'timetablef.php', method: 'POST' },
+            { icon: icons.attendance, title: 'Course Attendance', desc: 'Manage attendance records', action: 'attendance_date.php', method: 'POST', needsCourse: true },
+            { icon: icons.questionBank, title: 'Question Bank', desc: 'Manage question banks', action: 'q_bank.php', method: 'POST', needsCourse: true },
+            { icon: icons.marks, title: 'Midterm Marks', desc: 'Update midterm marks', action: 'midterm.php', method: 'POST', needsCourse: true },
+            { icon: icons.marks, title: 'Internal Marks', desc: 'Manage internal marks', action: 'internal.php', method: 'POST', needsCourse: true },
+            { icon: icons.marks, title: 'Practical Marks', desc: 'Enter practical marks', action: 'practical.php', method: 'POST', needsCourse: true },
+            { icon: icons.results, title: 'Marks Distribution', desc: 'View marks analytics', action: 'marksd.php', method: 'POST', needsCourse: true },
+            { icon: icons.results, title: 'Total Marks', desc: 'View total student marks', action: 'totalmarks.php', method: 'POST', needsCourse: true }
+        ];
+
         const toggleOptions = document.querySelectorAll('.toggle-option');
         const toggleSlider = document.querySelector('.toggle-slider');
 
         toggleOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const value = option.dataset.value;
-                
-                // Update active states
                 toggleOptions.forEach(opt => opt.classList.remove('active'));
                 option.classList.add('active');
-                
-                // Move slider
-                if (value === 'faculty') {
-                    toggleSlider.classList.add('faculty');
-                } else {
-                    toggleSlider.classList.remove('faculty');
-                }
-                
-                // Update current user type
+                if (value === 'faculty') toggleSlider.classList.add('faculty');
+                else toggleSlider.classList.remove('faculty');
                 currentUser.type = value;
                 updateFormForUserType();
             });
         });
 
-        // Toggle manual entry section
         const toggleManualEntryBtn = document.getElementById('toggleManualEntryBtn');
         const manualEntrySection = document.getElementById('manualEntrySection');
         const cancelManualEntryBtn = document.getElementById('cancelManualEntryBtn');
@@ -1517,78 +681,45 @@
         toggleManualEntryBtn.addEventListener('click', () => {
             manualEntrySection.classList.toggle('hidden');
             if (!manualEntrySection.classList.contains('hidden')) {
-                toggleManualEntryBtn.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    Hide Form
-                `;
-                DOM.inputs.courseSearch.value = '';
-                DOM.inputs.course.value = '';
+                toggleManualEntryBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg> Hide Form`;
+                DOM.inputs.courseSearch.value = ''; DOM.inputs.course.value = '';
+                DOM.inputs.courseSearch.dispatchEvent(new Event('input'));
             } else {
-                toggleManualEntryBtn.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    Add New Course
-                `;
+                toggleManualEntryBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add New Course`;
                 clearManualFields();
             }
         });
 
         cancelManualEntryBtn.addEventListener('click', () => {
             manualEntrySection.classList.add('hidden');
-            toggleManualEntryBtn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                Add New Course
-            `;
+            toggleManualEntryBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add New Course`;
             clearManualFields();
         });
 
-        // Clear combobox when manual fields are used
         [DOM.inputs.manualFacultyName, DOM.inputs.manualCourseCode, DOM.inputs.manualCourseName].forEach(input => {
             input.addEventListener('input', () => {
                 if (input.value.trim()) {
-                    DOM.inputs.courseSearch.value = '';
-                    DOM.inputs.course.value = '';
+                    DOM.inputs.courseSearch.value = ''; DOM.inputs.course.value = '';
                     courseCombobox.classList.remove('open');
                 }
             });
         });
 
-        // Clear manual fields when combobox is used
         DOM.inputs.courseSearch.addEventListener('input', () => {
-            if (DOM.inputs.courseSearch.value.trim()) {
-                // Don't clear, just hide the manual section
-                if (!manualEntrySection.classList.contains('hidden')) {
-                    manualEntrySection.classList.add('hidden');
-                    toggleManualEntryBtn.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        Add New Course
-                    `;
-                }
+            if (DOM.inputs.courseSearch.value.trim() && !manualEntrySection.classList.contains('hidden')) {
+                manualEntrySection.classList.add('hidden');
+                toggleManualEntryBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add New Course`;
             }
         });
 
-        // --- Combobox Logic ---
         const courseCombobox = document.querySelector('.combobox-wrapper');
         const courseSearchInput = DOM.inputs.courseSearch;
         const courseHiddenInput = DOM.inputs.course;
         const courseOptionsContainer = courseCombobox.querySelector('.combobox-options');
 
         courseSearchInput.addEventListener('focus', () => courseCombobox.classList.add('open'));
-
         document.addEventListener('click', (e) => {
-            if (!courseCombobox.contains(e.target)) {
-                courseCombobox.classList.remove('open');
-            }
+            if (!courseCombobox.contains(e.target)) courseCombobox.classList.remove('open');
         });
 
         courseSearchInput.addEventListener('input', () => {
@@ -1598,188 +729,111 @@
                 const match = option.textContent.toLowerCase().includes(searchTerm);
                 option.style.display = match ? 'block' : 'none';
             });
+            courseCombobox.classList.toggle('selected', !!courseSearchInput.value);
         });
 
         courseOptionsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('combobox-option')) {
-                const selectedValue = e.target.dataset.value;
-                const selectedText = e.target.textContent;
-
-                courseHiddenInput.value = selectedValue;
-                courseSearchInput.value = selectedText;
+                courseHiddenInput.value = e.target.dataset.value;
+                courseSearchInput.value = e.target.textContent;
                 courseCombobox.classList.remove('open');
-
-                courseSearchInput.dispatchEvent(new Event('input')); // To trigger label animation
+                courseSearchInput.dispatchEvent(new Event('input'));
             }
         });
 
-        DOM.loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (validateForm()) handleLogin();
-        });
+        DOM.loginForm.addEventListener('submit', (e) => { e.preventDefault(); if (validateForm()) handleLogin(); });
 
-        // --- UI Update Functions ---
         function updateFormForUserType() {
             clearAllErrors();
             const isFaculty = currentUser.type === 'faculty';
             DOM.studentFields.classList.toggle('show', !isFaculty);
             DOM.facultyFields.classList.toggle('show', isFaculty);
-            
-            if (isFaculty) {
-                renderSavedCourses();
-            }
+            if (isFaculty) renderSavedCourses();
         }
 
         function clearManualFields() {
-            DOM.inputs.manualFacultyName.value = '';
-            DOM.inputs.manualCourseCode.value = '';
-            DOM.inputs.manualCourseName.value = '';
-            
-            // Reset dropdowns
+            DOM.inputs.manualFacultyName.value = ''; DOM.inputs.manualCourseCode.value = ''; DOM.inputs.manualCourseName.value = '';
             const semesterSelect = document.getElementById('manualSemester');
             const yearSelect = document.getElementById('manualYear');
-            if (semesterSelect) {
-                semesterSelect.selectedIndex = 0;
-                semesterSelect.dispatchEvent(new Event('change'));
-            }
-            if (yearSelect) {
-                yearSelect.selectedIndex = 0;
-                yearSelect.dispatchEvent(new Event('change'));
-            }
+            if (semesterSelect) { semesterSelect.selectedIndex = 0; semesterSelect.dispatchEvent(new Event('change')); }
+            if (yearSelect) { yearSelect.selectedIndex = 0; yearSelect.dispatchEvent(new Event('change')); }
         }
 
-        // --- LocalStorage Management ---
         const STORAGE_KEY = 'faculty_custom_courses';
 
         function getSavedCourses() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                return saved ? JSON.parse(saved) : {};
-            } catch (e) {
-                console.error('Error reading saved courses:', e);
-                return {};
-            }
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
         }
 
         function saveCourse(courseKey, courseData) {
             try {
-                const courses = getSavedCourses();
-                courses[courseKey] = courseData;
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(courses));
-                return true;
-            } catch (e) {
-                console.error('Error saving course:', e);
-                showSnackbar('Failed to save course to storage');
-                return false;
-            }
+                const courses = getSavedCourses(); courses[courseKey] = courseData;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(courses)); return true;
+            } catch { showSnackbar('Failed to save course'); return false; }
         }
 
         function deleteCourse(courseKey) {
             try {
-                const courses = getSavedCourses();
-                delete courses[courseKey];
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(courses));
-                return true;
-            } catch (e) {
-                console.error('Error deleting course:', e);
-                showSnackbar('Failed to delete course');
-                return false;
-            }
+                const courses = getSavedCourses(); delete courses[courseKey];
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(courses)); return true;
+            } catch { showSnackbar('Failed to delete course'); return false; }
         }
 
         function renderSavedCourses() {
-            const container = document.getElementById('savedCoursesContainer');
-            container.innerHTML = '';
-
-            const savedCourses = getSavedCourses();
-            const courseKeys = Object.keys(savedCourses);
-
+            const container = document.getElementById('savedCoursesContainer'); container.innerHTML = '';
+            const savedCourses = getSavedCourses(); const courseKeys = Object.keys(savedCourses);
             if (courseKeys.length === 0) return;
 
-            const section = document.createElement('div');
-            section.className = 'saved-courses-section';
-            section.innerHTML = `
-                <div class="saved-courses-title">
-                    ${icons.bookmark}
-                    Your Saved Courses
-                </div>
-            `;
+            const section = document.createElement('div'); section.className = 'saved-courses-section';
+            section.innerHTML = `<div class="saved-courses-title">${icons.bookmark} Saved Courses</div>`;
 
             courseKeys.forEach(key => {
                 const course = savedCourses[key];
-                const item = document.createElement('div');
-                item.className = 'saved-course-item';
-                item.dataset.key = key;
+                const item = document.createElement('div'); item.className = 'saved-course-item'; item.dataset.key = key;
                 item.innerHTML = `
                     <div class="saved-course-info">
                         <div class="saved-course-name">${course.code} - ${course.name}</div>
-                        <div class="saved-course-details">${course.coordinator} | Sem ${course.sem} | Year ${course.year}</div>
+                        <div class="saved-course-details">${course.coordinator} | Sem ${course.sem} | Yr ${course.year}</div>
                     </div>
-                    <button class="delete-course-btn" data-key="${key}" title="Delete this course">
-                        ${icons.delete}
-                    </button>
+                    <button class="delete-course-btn" data-key="${key}">${icons.delete}</button>
                 `;
-
-                // Click to select course
                 item.querySelector('.saved-course-info').addEventListener('click', () => {
-                    // Remove previous selection
                     document.querySelectorAll('.saved-course-item').forEach(el => el.classList.remove('selected'));
                     item.classList.add('selected');
-                    
                     DOM.inputs.course.value = key;
                     DOM.inputs.courseSearch.value = `${course.code} - ${course.name} (Sem ${course.sem})`;
-                    
-                    // Hide manual entry if open
-                    const manualSection = document.getElementById('manualEntrySection');
-                    if (!manualSection.classList.contains('hidden')) {
-                        manualSection.classList.add('hidden');
-                        document.getElementById('toggleManualEntryBtn').innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                            Add New Course
-                        `;
-                    }
-                    
+                    DOM.inputs.courseSearch.dispatchEvent(new Event('input'));
+                    if (!manualEntrySection.classList.contains('hidden')) toggleManualEntryBtn.click();
                     showSnackbar('Course selected');
                 });
-
-                // Delete button
                 item.querySelector('.delete-course-btn').addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (confirm(`Delete "${course.name}"?`)) {
-                        if (deleteCourse(key)) {
-                            showSnackbar('Course deleted');
-                            renderSavedCourses();
-                            populateFacultyCombobox();
-                            // Clear selection if this was the selected course
-                            if (DOM.inputs.course.value === key) {
-                                DOM.inputs.course.value = '';
-                                DOM.inputs.courseSearch.value = '';
+                    showConfirmDialog(
+                        'Delete Course', 
+                        `Are you sure you want to delete "${course.name}"?`, 
+                        'Delete', 
+                        () => {
+                            if (deleteCourse(key)) {
+                                showSnackbar('Deleted'); renderSavedCourses(); populateFacultyCombobox();
+                                if (DOM.inputs.course.value === key) { DOM.inputs.course.value = ''; DOM.inputs.courseSearch.value = ''; }
                             }
                         }
-                    }
+                    );
                 });
-
                 section.appendChild(item);
             });
-
             container.appendChild(section);
         }
 
         function populateFacultyCombobox() {
             courseOptionsContainer.innerHTML = '';
-            
-            // Merge predefined and saved courses
             const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
-            
             for (const key in allCourses) {
                 const course = allCourses[key];
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'combobox-option';
                 optionDiv.textContent = `${course.code} - ${course.name} (Sem ${course.sem})`;
-                optionDiv.dataset.value = key; // Use the unique key
+                optionDiv.dataset.value = key;
                 courseOptionsContainer.appendChild(optionDiv);
             }
         }
@@ -1787,34 +841,26 @@
         function showDashboard() {
             DOM.loginContainer.classList.add('hidden');
             DOM.dashboardContainer.classList.remove('hidden');
-            DOM.topNavbar.classList.remove('hidden');
 
             const isFaculty = currentUser.type === 'faculty';
-            const avatarHTML = isFaculty ? icons.avatarFaculty : icons.avatarStudent;
-
-            DOM.dashboard.avatar.innerHTML = avatarHTML;
-            DOM.topNavAvatar.innerHTML = avatarHTML;
 
             if (isFaculty) {
                 const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
                 const courseInfo = allCourses[currentUser.courseCode];
-                DOM.dashboard.welcome.textContent = `Welcome, ${currentUser.facultyName}!`;
+                DOM.dashboard.welcome.textContent = `Welcome, ${currentUser.facultyName}`;
                 DOM.dashboard.userInfo.innerHTML = `
                     <div class="user-info-split">
                         <span class="info-primary">${courseInfo.code} - ${courseInfo.name}</span>
-                        <span class="info-secondary">Semester ${courseInfo.sem} | Academic Year: ${courseInfo.year}</span>
+                        <span class="info-secondary">Sem ${courseInfo.sem} | Year ${courseInfo.year}</span>
                     </div>`;
-                DOM.topNavUserInfo.innerHTML = DOM.dashboard.userInfo.innerHTML;
             } else {
-                DOM.dashboard.welcome.textContent = 'Welcome, Student!';
+                DOM.dashboard.welcome.textContent = 'Welcome, Student';
                 DOM.dashboard.userInfo.innerHTML = `
                      <div class="user-info-split">
                         <span class="info-primary">ID: ${currentUser.phone}</span>
-                        <span class="info-secondary">Academic Year: ${currentUser.year}</span>
+                        <span class="info-secondary">Year: ${currentUser.year}</span>
                     </div>`;
-                DOM.topNavUserInfo.innerHTML = DOM.dashboard.userInfo.innerHTML;
             }
-
             DOM.dashboard.sectionTitle.textContent = isFaculty ? 'Faculty Services' : 'Student Services';
             populateMenu();
         }
@@ -1823,10 +869,8 @@
             DOM.menuGrid.innerHTML = '';
             const menuItems = currentUser.type === 'faculty' ? facultyMenuItems : studentMenuItems;
             menuItems.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'menu-card';
-                card.tabIndex = 0;
-                card.innerHTML = `<div class="menu-icon">${item.icon}</div><div class="menu-info"><div class="menu-title">${item.title}</div><div class="menu-desc">${item.desc}</div></div>`;
+                const card = document.createElement('div'); card.className = 'menu-card'; card.tabIndex = 0;
+                card.innerHTML = `<div class="menu-icon">${item.icon}</div><div><div class="menu-title">${item.title}</div><div class="menu-desc">${item.desc}</div></div>`;
                 card.addEventListener('click', () => handleMenuClick(item));
                 card.addEventListener('keydown', (e) => (e.key === 'Enter' || e.key === ' ') && handleMenuClick(item));
                 DOM.menuGrid.appendChild(card);
@@ -1835,177 +879,108 @@
 
         function showSnackbar(message) {
             const container = document.getElementById('snackbar-container');
-            const snackbar = document.createElement('div');
-            snackbar.className = 'snackbar';
-            snackbar.textContent = message;
-            container.appendChild(snackbar);
-            setTimeout(() => snackbar.remove(), 3500);
+            const snackbar = document.createElement('div'); snackbar.className = 'snackbar'; snackbar.textContent = message;
+            container.appendChild(snackbar); setTimeout(() => snackbar.remove(), 3000);
         }
 
-        // --- Logic Functions ---
+        function showConfirmDialog(title, message, confirmText, onConfirm) {
+            const dialog = document.getElementById('alertDialog');
+            document.getElementById('alertTitle').textContent = title;
+            document.getElementById('alertMessage').textContent = message;
+            const confirmBtn = document.getElementById('alertConfirmBtn');
+            confirmBtn.textContent = confirmText;
+            
+            const closeDialog = () => dialog.classList.remove('visible');
+            
+            confirmBtn.onclick = () => { closeDialog(); onConfirm(); };
+            document.getElementById('alertCancelBtn').onclick = closeDialog;
+            
+            dialog.classList.add('visible');
+        }
+
         function handleLogin() {
             const originalText = DOM.loginBtn.textContent;
-            DOM.loginBtn.innerHTML = '<span class="loading-spinner"></span>';
-            DOM.loginBtn.disabled = true;
+            DOM.loginBtn.innerHTML = '<span class="loading-spinner"></span>'; DOM.loginBtn.disabled = true;
 
             if (currentUser.type === 'faculty') {
                 const courseKey = DOM.inputs.course.value;
-                
-                // Check if using manual entry
                 const isManualEntry = !courseKey && DOM.inputs.manualFacultyName.value.trim();
                 
                 if (isManualEntry) {
-                    // Create course from manual fields
                     const manualCourseCode = DOM.inputs.manualCourseCode.value.trim();
-                    const manualSemSelect = document.getElementById('manualSemester');
-                    const manualYearSelect = document.getElementById('manualYear');
-                    const manualSem = manualSemSelect.value;
-                    const manualYear = manualYearSelect.value;
+                    const manualSem = document.getElementById('manualSemester').value;
+                    const manualYear = document.getElementById('manualYear').value;
                     const generatedKey = `${manualCourseCode}_${manualSem}_${manualYear}`;
-                    
                     const courseData = {
-                        code: manualCourseCode,
-                        name: DOM.inputs.manualCourseName.value.trim(),
-                        coordinator: DOM.inputs.manualFacultyName.value.trim(),
-                        sem: manualSem,
-                        year: manualYear
+                        code: manualCourseCode, name: DOM.inputs.manualCourseName.value.trim(),
+                        coordinator: DOM.inputs.manualFacultyName.value.trim(), sem: manualSem, year: manualYear
                     };
-                    
-                    // Save to localStorage
                     saveCourse(generatedKey, courseData);
-                    
-                    currentUser.facultyName = courseData.coordinator;
-                    currentUser.phone = courseData.coordinator;
-                    currentUser.year = courseData.year;
-                    currentUser.semester = courseData.sem;
-                    currentUser.courseCode = generatedKey;
-                    
-                    showSnackbar('Custom course saved!');
+                    currentUser = { ...currentUser, facultyName: courseData.coordinator, phone: courseData.coordinator, year: courseData.year, semester: courseData.sem, courseCode: generatedKey };
+                    showSnackbar('Course saved');
                 } else {
-                    // Use selected course from dropdown
                     const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
                     const courseData = allCourses[courseKey];
-                    currentUser.facultyName = courseData.coordinator;
-                    currentUser.phone = courseData.coordinator;
-                    currentUser.year = courseData.year;
-                    currentUser.semester = courseData.sem;
-                    currentUser.courseCode = courseKey;
+                    currentUser = { ...currentUser, facultyName: courseData.coordinator, phone: courseData.coordinator, year: courseData.year, semester: courseData.sem, courseCode: courseKey };
                 }
             } else {
                 currentUser.phone = DOM.inputs.studentPhoneNumber.value.trim();
                 currentUser.year = DOM.inputs.year.value;
             }
 
-            setTimeout(() => {
-                showDashboard();
-                DOM.loginBtn.innerHTML = originalText;
-                DOM.loginBtn.disabled = false;
-            }, 1200);
+            setTimeout(() => { showDashboard(); DOM.loginBtn.innerHTML = originalText; DOM.loginBtn.disabled = false; }, 800);
         }
 
         function handleMenuClick(item) {
-            if (item.special === 'semester_results') {
-                DOM.semesterModal.classList.add('visible');
-                return;
-            }
+            if (item.special === 'semester_results') { DOM.semesterModal.classList.add('visible'); return; }
 
             let baseUrl, actionUrl;
             const shortYear = currentUser.year.toString().slice(-2);
-
             if (currentUser.type === 'faculty') {
                 if (item.special === 'exam_duty') {
-                    baseUrl = `http://14.139.238.230/doon23/`; // As per original, seems static
-                    actionUrl = `${baseUrl}${item.action}?fcode=${currentUser.phone}`;
-                    window.open(actionUrl, '_blank');
-                    showSnackbar(`Opening ${item.title}...`);
-                    return;
-                } else {
-                    baseUrl = `http://14.139.238.230/doon${shortYear}/faculty/`;
-                }
-            } else {
-                baseUrl = `http://14.139.238.230/doon${shortYear}/student/`;
-            }
+                    window.open(`http://14.139.238.230/doon23/${item.action}?fcode=${currentUser.phone}`, '_blank');
+                    showSnackbar(`Opening ${item.title}...`); return;
+                } else baseUrl = `http://14.139.238.230/doon${shortYear}/faculty/`;
+            } else baseUrl = `http://14.139.238.230/doon${shortYear}/student/`;
+            
             actionUrl = `${baseUrl}${item.action}`;
-
-            const form = document.createElement('form');
-            form.method = item.method || 'POST';
-            form.action = actionUrl;
-            form.target = '_blank';
-            form.style.display = 'none';
+            const form = document.createElement('form'); form.method = item.method || 'POST';
+            form.action = actionUrl; form.target = '_blank'; form.style.display = 'none';
 
             const fields = { user_id: currentUser.type === 'student' ? currentUser.phone : currentUser.facultyName };
             if (currentUser.type === 'faculty' && item.needsCourse) {
                 const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
-                const courseInfo = allCourses[currentUser.courseCode];
-                fields.ccode = courseInfo.code;
-                fields.sem = currentUser.semester;
+                fields.ccode = allCourses[currentUser.courseCode].code; fields.sem = currentUser.semester;
             }
             if (item.params) Object.assign(fields, item.params);
 
             for (const key in fields) {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = key;
-                input.value = fields[key];
-                form.appendChild(input);
+                const input = document.createElement('input'); input.type = 'hidden';
+                input.name = key; input.value = fields[key]; form.appendChild(input);
             }
-
-            document.body.appendChild(form);
-            form.submit();
-            document.body.removeChild(form);
-
+            document.body.appendChild(form); form.submit(); document.body.removeChild(form);
             showSnackbar(`Opening ${item.title}...`);
         }
 
         function signOut() {
-            if (confirm('Are you sure you want to sign out?')) {
-                DOM.loginForm.reset();
-                courseSearchInput.value = ''; // Clear combobox
-                clearManualFields(); // Clear manual entry fields
-                
-                // Reset toggle to student
-                toggleOptions.forEach(opt => opt.classList.remove('active'));
-                toggleOptions[0].classList.add('active'); // First option is student
-                toggleSlider.classList.remove('faculty');
-                
-                document.querySelectorAll('.native-select').forEach(sel => {
-                    sel.selectedIndex = 0;
-                    sel.dispatchEvent(new Event('change'));
-                });
-
-                currentUser = { type: 'student', phone: '', year: '', courseCode: '', semester: '', facultyName: '' };
-
-                DOM.dashboardContainer.classList.add('hidden');
-                DOM.loginContainer.classList.remove('hidden');
-                DOM.topNavbar.classList.add('hidden');
-                DOM.topNavbar.classList.remove('visible');
-                updateFormForUserType();
-                populateFacultyCombobox(); // Refresh combobox with any new saved courses
-                showSnackbar('Signed out successfully');
-            }
+            DOM.loginForm.reset(); courseSearchInput.value = ''; clearManualFields();
+            toggleOptions.forEach(opt => opt.classList.remove('active')); toggleOptions[0].classList.add('active');
+            toggleSlider.classList.remove('faculty');
+            document.querySelectorAll('.native-select').forEach(sel => { sel.selectedIndex = 0; sel.dispatchEvent(new Event('change')); });
+            currentUser = { type: 'student', phone: '', year: '', courseCode: '', semester: '', facultyName: '' };
+            DOM.dashboardContainer.classList.add('hidden'); DOM.loginContainer.classList.remove('hidden');
+            updateFormForUserType(); populateFacultyCombobox(); showSnackbar('Signed out');
         }
 
-        // --- Validation ---
         function validateForm() {
-            clearAllErrors();
-            let isValid = true;
-
+            clearAllErrors(); let isValid = true;
             if (currentUser.type === 'student') {
-                if (!DOM.inputs.year.value) isValid = showError('year', 'Please select an academic year.');
-                if (!/^\d{10}$/.test(DOM.inputs.studentPhoneNumber.value)) isValid = showError('studentPhone', 'Phone number must be 10 digits.');
-            } else { // Faculty validation
+                if (!DOM.inputs.year.value) isValid = showError('year', 'Select academic year.');
+                if (!/^\d{10}$/.test(DOM.inputs.studentPhoneNumber.value)) isValid = showError('studentPhone', '10 digits required.');
+            } else {
                 const hasComboboxSelection = !!DOM.inputs.course.value;
-                const manualSemSelect = document.getElementById('manualSemester');
-                const manualYearSelect = document.getElementById('manualYear');
-                const hasManualEntry = DOM.inputs.manualFacultyName.value.trim() &&
-                                      DOM.inputs.manualCourseCode.value.trim() &&
-                                      DOM.inputs.manualCourseName.value.trim() &&
-                                      manualSemSelect.value &&
-                                      manualYearSelect.value;
-                
-                if (!hasComboboxSelection && !hasManualEntry) {
-                    isValid = showError('course', 'Please select a course or fill in all manual fields.');
-                }
+                const hasManualEntry = DOM.inputs.manualFacultyName.value.trim() && DOM.inputs.manualCourseCode.value.trim() && DOM.inputs.manualCourseName.value.trim() && document.getElementById('manualSemester').value && document.getElementById('manualYear').value;
+                if (!hasComboboxSelection && !hasManualEntry) isValid = showError('course', 'Select a course or fill manual fields.');
             }
             return isValid;
         }
@@ -2015,14 +990,9 @@
             const group = el ? el.closest('.input-group') : document.getElementById(field).closest('.input-group');
             if (group) {
                 const wrapper = group.querySelector('.md-select-wrapper, .combobox-wrapper');
-                if (wrapper) {
-                    wrapper.classList.add('invalid');
-                } else {
-                    group.querySelector('.md-input').classList.add('invalid');
-                }
+                if (wrapper) wrapper.classList.add('invalid'); else group.querySelector('.md-input').classList.add('invalid');
             }
-            DOM.errors[field].textContent = message;
-            return false;
+            DOM.errors[field].textContent = message; return false;
         }
 
         function clearAllErrors() {
@@ -2030,49 +1000,22 @@
             document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
         }
 
-        // --- Initial Setup & Observers ---
         function initialize() {
-            // Create custom selects for all native selects except the removed userTypeSelect
             document.querySelectorAll('.native-select').forEach(createCustomSelect);
-
             const currentYear = new Date().getFullYear();
-            const yearSelect = DOM.inputs.year;
-            if (Array.from(yearSelect.options).some(opt => opt.value == currentYear)) {
-                yearSelect.value = currentYear.toString();
-                yearSelect.dispatchEvent(new Event('change'));
+            if (Array.from(DOM.inputs.year.options).some(opt => opt.value == currentYear)) {
+                DOM.inputs.year.value = currentYear.toString(); DOM.inputs.year.dispatchEvent(new Event('change'));
             }
-            
-            // Set default year for manual entry
             const manualYearSelect = document.getElementById('manualYear');
             if (manualYearSelect && Array.from(manualYearSelect.options).some(opt => opt.value == currentYear)) {
-                manualYearSelect.value = currentYear.toString();
-                manualYearSelect.dispatchEvent(new Event('change'));
+                manualYearSelect.value = currentYear.toString(); manualYearSelect.dispatchEvent(new Event('change'));
             }
-            
-            // Initialize with student view
-            currentUser.type = 'student';
-            updateFormForUserType();
-            populateFacultyCombobox();
-
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    DOM.topNavbar.classList.toggle('visible', !entry.isIntersecting);
-                },
-                { threshold: 0.1 }
-            );
-            observer.observe(DOM.dashboardHeader);
+            currentUser.type = 'student'; updateFormForUserType(); populateFacultyCombobox();
 
             DOM.semesterModal.addEventListener('click', (e) => {
-                if (e.target === DOM.semesterModal || e.target === DOM.modalCloseBtn) {
-                    DOM.semesterModal.classList.remove('visible');
-                }
+                if (e.target === DOM.semesterModal || e.target === DOM.modalCloseBtn) DOM.semesterModal.classList.remove('visible');
                 if (e.target.classList.contains('semester-button')) {
-                    const sem = e.target.dataset.sem;
-                    handleMenuClick({
-                        action: 'marks.php',
-                        method: 'POST',
-                        params: { sem }
-                    });
+                    handleMenuClick({ action: 'marks.php', method: 'POST', params: { sem: e.target.dataset.sem } });
                     DOM.semesterModal.classList.remove('visible');
                 }
             });
@@ -2081,5 +1024,4 @@
         document.addEventListener('DOMContentLoaded', initialize);
     </script>
 </body>
-
 </html>
