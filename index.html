@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   
+   <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Academic Portal">
+    <meta property="og:description" content="Unified access for faculty and students. Manage attendance, marks, and academic records seamlessly.">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/177772946?v=4">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/177772946?v=4">
+
     <title>Academic Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -656,7 +667,9 @@
             { icon: icons.marks, title: 'Internal Marks', desc: 'Manage internal marks', action: 'internal.php', method: 'POST', needsCourse: true },
             { icon: icons.marks, title: 'Practical Marks', desc: 'Enter practical marks', action: 'practical.php', method: 'POST', needsCourse: true },
             { icon: icons.results, title: 'Marks Distribution', desc: 'View marks analytics', action: 'marksd.php', method: 'POST', needsCourse: true },
-            { icon: icons.results, title: 'Total Marks', desc: 'View total student marks', action: 'totalmarks.php', method: 'POST', needsCourse: true }
+            { icon: icons.results, title: 'Total Marks', desc: 'View total student marks', action: 'totalmarks.php', method: 'POST', needsCourse: true },
+            { icon: icons.marks, title: 'End term marks (Exam Cell)', desc: 'View end term marks', action: 'endterm.php', method: 'POST', needsCourse: true, isControl: true },
+            { icon: icons.results, title: 'Total Marks (Exam Cell)', desc: 'View total marks (Exam Cell)', action: 'totalmarks.php', method: 'POST', needsCourse: true, isControl: true }
         ];
 
         const toggleOptions = document.querySelectorAll('.toggle-option');
@@ -905,27 +918,29 @@
             if (currentUser.type === 'faculty') {
                 const courseKey = DOM.inputs.course.value;
                 const isManualEntry = !courseKey && DOM.inputs.manualFacultyName.value.trim();
+                let generatedKey;
                 
                 if (isManualEntry) {
                     const manualCourseCode = DOM.inputs.manualCourseCode.value.trim();
                     const manualSem = document.getElementById('manualSemester').value;
                     const manualYear = document.getElementById('manualYear').value;
-                    const generatedKey = `${manualCourseCode}_${manualSem}_${manualYear}`;
+                    generatedKey = `${manualCourseCode}_${manualSem}_${manualYear}`;
                     const courseData = {
                         code: manualCourseCode, name: DOM.inputs.manualCourseName.value.trim(),
                         coordinator: DOM.inputs.manualFacultyName.value.trim(), sem: manualSem, year: manualYear
                     };
                     saveCourse(generatedKey, courseData);
-                    currentUser = { ...currentUser, facultyName: courseData.coordinator, phone: courseData.coordinator, year: courseData.year, semester: courseData.sem, courseCode: generatedKey };
-                    showSnackbar('Course saved');
-                } else {
-                    const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
-                    const courseData = allCourses[courseKey];
-                    currentUser = { ...currentUser, facultyName: courseData.coordinator, phone: courseData.coordinator, year: courseData.year, semester: courseData.sem, courseCode: courseKey };
                 }
+
+                const allCourses = { ...COURSE_DATA, ...getSavedCourses() };
+                currentUser = {
+                    type: 'faculty', facultyName: isManualEntry ? DOM.inputs.manualFacultyName.value.trim() : allCourses[courseKey].coordinator,
+                    courseCode: isManualEntry ? generatedKey : courseKey,
+                    semester: isManualEntry ? document.getElementById('manualSemester').value : allCourses[courseKey].sem,
+                    year: isManualEntry ? document.getElementById('manualYear').value : allCourses[courseKey].year
+                };
             } else {
-                currentUser.phone = DOM.inputs.studentPhoneNumber.value.trim();
-                currentUser.year = DOM.inputs.year.value;
+                currentUser = { type: 'student', phone: DOM.inputs.studentPhoneNumber.value.trim(), year: DOM.inputs.year.value };
             }
 
             setTimeout(() => { showDashboard(); DOM.loginBtn.innerHTML = originalText; DOM.loginBtn.disabled = false; }, 800);
@@ -940,6 +955,8 @@
                 if (item.special === 'exam_duty') {
                     window.open(`http://14.139.238.230/doon23/${item.action}?fcode=${currentUser.phone}`, '_blank');
                     showSnackbar(`Opening ${item.title}...`); return;
+                } else if (item.isControl) {
+                    baseUrl = `http://14.139.238.230/doon${shortYear}/control/`;
                 } else baseUrl = `http://14.139.238.230/doon${shortYear}/faculty/`;
             } else baseUrl = `http://14.139.238.230/doon${shortYear}/student/`;
             
