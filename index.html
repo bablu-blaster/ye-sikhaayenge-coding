@@ -471,6 +471,26 @@
     <script>
         // --- UNIFIED AND OPTIMIZED DATA SOURCE ---
         const COURSE_DATA = {
+
+            // Lamput   
+            '412111_2': { code: '412111', name: 'Elementary Intonation and Conversation', coordinator: 'Chia Hui Chen', sem: '2', year: '2025' },
+            '412112_2': { code: '412112', name: 'Elementary Comprehension Chinese-II', coordinator: 'Tanvi Negi', sem: '2', year: '2025' }, 
+            '412113_2': { code: '412113', name: 'Elementary Writing Chinese-II', coordinator: 'Shanky Chandra', sem: '2', year: '2025' }, 
+            '412211_2': { code: '412211', name: 'Elementary Chinese Reading-II', coordinator: 'Madhurendra Jha', sem: '2', year: '2025' },  
+            '412411_2': { code: '412411', name: 'Modern China (1840-1949)', coordinator: 'Nitin Mundepi', sem: '2', year: '2025' },  
+            '100518_2': { code: '100518', name: 'French II', coordinator: 'Neelma Misra', sem: '2', year: '2025' }, 
+
+
+            // VDE
+            // '722121_2': { code: '722121', name: 'Computer Architecture', coordinator: 'Ishaan Dhawar', sem: '2', year: '2025' },   
+            // '722122_2': { code: '722122', name: 'Discrete Mathematics', coordinator: 'Ashutosh Kumar Singh', sem: '2', year: '2025' },   
+            // '722123_2': { code: '722123', name: 'Fundamentals of Electronics', coordinator: 'Reenu Saini', sem: '2', year: '2025' },   
+            // '722421_2': { code: '722421', name: 'Optimization Techniques', coordinator: 'Dr. Mukesh Kumar', sem: '2', year: '2025' },   
+            // '742412_2': { code: '742412', name: 'Electrical Circuit Analysis', coordinator: 'Priyanka Bishnoi', sem: '2', year: '2025' },   
+            // '100532_2': { code: '100532', name: 'Communicative English', coordinator: 'APORWA', sem: '2', year: '2025' }, 
+            // '100610_2': { code: '100610', name: 'Environmental Studies', coordinator: 'Rommila chandra', sem: '2', year: '2025' },
+            
+
             '724111_4': { code: '724111', name: 'Database Management System', coordinator: 'Roopa Kumari', sem: '4', year: '2024' },
             '724112_4': { code: '724112', name: 'Numerical and Statistical Computing', coordinator: 'Kamini Bhatt', sem: '4', year: '2024' },
             '724113_4': { code: '724113', name: 'Design Algorithms and Analysis of algorithms', coordinator: 'Yashvi Uniyal', sem: '4', year: '2024' },
@@ -480,53 +500,37 @@
             '100514_4': { code: '100514', name: 'Spanish Language -II', coordinator: 'Ms. Shreya Rawat', sem: '4', year: '2024' },    
             '100533_4': { code: '100533', name: 'Hindi Language -II', coordinator: 'Kuldeep Chand Ramola', sem: '4', year: '2024' },
             '214411_4': { code: '214411', name: 'Interaction Design', coordinator: 'Vineet', sem: '4', year: '2024' },
-            
+         
 
-            // VDE
-            '722121_2': { code: '722121', name: 'Computer Architecture', coordinator: 'Ishaan Dhawar', sem: '2', year: '2025' },   
-            '722122_2': { code: '722122', name: 'Discrete Mathematics', coordinator: 'Ashutosh Kumar Singh', sem: '2', year: '2025' },   
-            '722123_2': { code: '722123', name: 'Fundamentals of Electronics', coordinator: 'Reenu Saini', sem: '2', year: '2025' },   
-            '722421_2': { code: '722421', name: 'Optimization Techniques', coordinator: 'Dr. Mukesh Kumar', sem: '2', year: '2025' },   
-            '742412_2': { code: '742412', name: 'Electrical Circuit Analysis', coordinator: 'Priyanka Bishnoi', sem: '2', year: '2025' },   
-            '100532_2': { code: '100532', name: 'Communicative English', coordinator: 'APORWA', sem: '2', year: '2025' }, 
-            '100610_2': { code: '100610', name: 'Environmental Studies', coordinator: 'Rommila chandra', sem: '2', year: '2025' },
-            
-            // Lamput   
-            '412111_2': { code: '412111', name: 'Elementary Intonation and Conversation', coordinator: 'Chia Hui Chen', sem: '2', year: '2025' },
-            '412112_2': { code: '412112', name: 'Elementary Comprehension Chinese-II', coordinator: 'Tanvi Negi', sem: '2', year: '2025' }, 
-            '412113_2': { code: '412113', name: 'Elementary Writing Chinese-II', coordinator: 'Shanky Chandra', sem: '2', year: '2025' }, 
-            '412211_2': { code: '412211', name: 'Elementary Chinese Reading-II', coordinator: 'Madhurendra Jha', sem: '2', year: '2025' },  
-            '412411_2': { code: '412411', name: 'Modern China (1840-1949)', coordinator: 'Nitin Mundepi', sem: '2', year: '2025' },  
-            '100518_2': { code: '100518', name: 'French II', coordinator: 'Neelma Misra', sem: '2', year: '2025' }, 
 
             // Harshit's Subjects
-            '724121_4': { code: '724121', name: 'DBMS Btech', coordinator: 'Roopa Kumari', sem: '4', year: '2024' },
-            '724122_4': { code: '724122', name: 'Numerical Btech', coordinator: 'Kamini Bhatt', sem: '4', year: '2024' },
-            '724123_4': { code: '724123', name: 'DAA Btech', coordinator: 'Yashvi Uniyal', sem: '4', year: '2024' },
-            '724221_4': { code: '724221', name: 'Web Tech Btech', coordinator: 'Mr. Ashutosh Kumar Singh', sem: '4', year: '2024' },
-            '724312_4': { code: '724312', name: 'DataScience Btech', coordinator: 'Kamal Rawal', sem: '4', year: '2024' },
+            // '724121_4': { code: '724121', name: 'DBMS Btech', coordinator: 'Roopa Kumari', sem: '4', year: '2024' },
+            // '724122_4': { code: '724122', name: 'Numerical Btech', coordinator: 'Kamini Bhatt', sem: '4', year: '2024' },
+            // '724123_4': { code: '724123', name: 'DAA Btech', coordinator: 'Yashvi Uniyal', sem: '4', year: '2024' },
+            // '724221_4': { code: '724221', name: 'Web Tech Btech', coordinator: 'Mr. Ashutosh Kumar Singh', sem: '4', year: '2024' },
+            // '724312_4': { code: '724312', name: 'DataScience Btech', coordinator: 'Kamal Rawal', sem: '4', year: '2024' },
 
             // // Ass Meat Subjects
-            '454111_4': { code: '454111', name: 'Spoken Japanese', coordinator: 'Ms. Shinobu Narikawa', sem: '4', year: '2024' },
-            '454112_4': { code: '454112', name: 'Intermediate Text & Grammar – II', coordinator: 'Ms. Shinobu Narikawa', sem: '4', year: '2024' },
-            '454113_4': { code: '454113', name: 'Translation- II', coordinator: 'Ms. Kanchan Kukreti', sem: '4', year: '2024' },
-            '454211_4': { code: '454211', name: 'Composition writing II', coordinator: 'Anjali Nautiyal', sem: '4', year: '2024' },
-            '454411_4': { code: '454411', name: 'Introduction to Japanese History - II', coordinator: 'Soniya Ramanand Wasnik', sem: '4', year: '2024' },
+            // '454111_4': { code: '454111', name: 'Spoken Japanese', coordinator: 'Ms. Shinobu Narikawa', sem: '4', year: '2024' },
+            // '454112_4': { code: '454112', name: 'Intermediate Text & Grammar – II', coordinator: 'Ms. Shinobu Narikawa', sem: '4', year: '2024' },
+            // '454113_4': { code: '454113', name: 'Translation- II', coordinator: 'Ms. Kanchan Kukreti', sem: '4', year: '2024' },
+            // '454211_4': { code: '454211', name: 'Composition writing II', coordinator: 'Anjali Nautiyal', sem: '4', year: '2024' },
+            // '454411_4': { code: '454411', name: 'Introduction to Japanese History - II', coordinator: 'Soniya Ramanand Wasnik', sem: '4', year: '2024' },
 
             //Semalti Subjects
-            '434112_4': { code: '434112', name: 'French through Creative Activities-IV', coordinator: 'Diksha Dangwal', sem: '4', year: '2024' },
+            // '434112_4': { code: '434112', name: 'French through Creative Activities-IV', coordinator: 'Diksha Dangwal', sem: '4', year: '2024' },
 
             // Extra Subjects I added because I felt bad for someone!
-            '100611_2': { code: '100611', name: 'UHV', coordinator: 'nemo', sem: '2', year: '2025' },
-            '842211_2': { code: '842211', name: 'Experimentation in Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
-            '842113_2': { code: '842113', name: 'Biopsychology', coordinator: 'nemo', sem: '2', year: '2025' },
-            '842211_2': { code: '842211', name: 'Experimentation in Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
-            '842111_2': { code: '842111', name: 'Life span development', coordinator: 'nemo', sem: '2', year: '2025' },
-            '842112_2': { code: '842112', name: 'Health Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
-            '112111_2': { code: '112111', name: 'Chemistry II', coordinator: 'Jyotsna Singh', sem: '1', year: '2025' },
+            // '100611_2': { code: '100611', name: 'UHV', coordinator: 'nemo', sem: '2', year: '2025' },
+            // '842211_2': { code: '842211', name: 'Experimentation in Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
+            // '842113_2': { code: '842113', name: 'Biopsychology', coordinator: 'nemo', sem: '2', year: '2025' },
+            // '842211_2': { code: '842211', name: 'Experimentation in Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
+            // '842111_2': { code: '842111', name: 'Life span development', coordinator: 'nemo', sem: '2', year: '2025' },
+            // '842112_2': { code: '842112', name: 'Health Psychology', coordinator: 'nemo', sem: '2', year: '2025' },
+            // '112111_2': { code: '112111', name: 'Chemistry II', coordinator: 'Jyotsna Singh', sem: '1', year: '2025' },
 
             //EMERGENCY
-            '731112_2': { code: '731112', name: 'Algebra sem 1', coordinator: 'sarita singh', sem: '1', year: '2023' },
+            // '731112_2': { code: '731112', name: 'Algebra sem 1', coordinator: 'sarita singh', sem: '1', year: '2023' },
         };
 
         function createCustomSelect(selectElement) {
@@ -958,12 +962,12 @@
             const shortYear = currentUser.year.toString().slice(-2);
             if (currentUser.type === 'faculty') {
                 if (item.special === 'exam_duty') {
-                    window.open(`http://14.139.238.230/doon23/${item.action}?fcode=${currentUser.phone}`, '_blank');
+                    window.open(`http://192.168.0.18/doon23/${item.action}?fcode=${currentUser.phone}`, '_blank');
                     showSnackbar(`Opening ${item.title}...`); return;
                 } else if (item.isControl) {
-                    baseUrl = `http://14.139.238.230/doon${shortYear}/control/`;
-                } else baseUrl = `http://14.139.238.230/doon${shortYear}/faculty/`;
-            } else baseUrl = `http://14.139.238.230/doon${shortYear}/student/`;
+                    baseUrl = `http://192.168.0.18/doon${shortYear}/control/`;
+                } else baseUrl = `http://192.168.0.18/doon${shortYear}/faculty/`;
+            } else baseUrl = `http://192.168.0.18/doon${shortYear}/student/`;
             
             actionUrl = `${baseUrl}${item.action}`;
             const form = document.createElement('form'); form.method = item.method || 'POST';
