@@ -916,12 +916,12 @@
             const shortYear = currentUser.year.toString().slice(-2);
             if (currentUser.type === 'faculty') {
                 if (item.special === 'exam_duty') {
-                    window.open(`http://192.168.0.18/doon23/${item.action}?fcode=${currentUser.phone}`, '_blank');
+                    window.open(`http://14.139.238.230/doon23/${item.action}?fcode=${currentUser.phone}`, '_blank');
                     showSnackbar(`Opening ${item.title}...`); return;
                 } else if (item.isControl) {
-                    baseUrl = `http://192.168.0.18/doon${shortYear}/control/`;
-                } else baseUrl = `http://192.168.0.18/doon${shortYear}/faculty/`;
-            } else baseUrl = `http://192.168.0.18/doon${shortYear}/student/`;
+                    baseUrl = `http://14.139.238.230/doon${shortYear}/control/`;
+                } else baseUrl = `http://14.139.238.230/doon${shortYear}/faculty/`;
+            } else baseUrl = `http://14.139.238.230/doon${shortYear}/student/`;
             
             actionUrl = `${baseUrl}${item.action}`;
             const form = document.createElement('form'); form.method = item.method || 'POST';
